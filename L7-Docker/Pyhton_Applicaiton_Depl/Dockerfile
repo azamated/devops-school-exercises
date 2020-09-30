@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 RUN apt-get update
-ADD ./app/requirements.txt /tmp/requirements.txt
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q python-all python-pip
+ADD ./app/requirements.txt /tmp/requirements.txt
 RUN pip install -qr /tmp/requirements.txt
 ADD ./app /opt/webapp/
 EXPOSE 5000
