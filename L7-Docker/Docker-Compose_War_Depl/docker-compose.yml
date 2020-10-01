@@ -14,7 +14,7 @@ services:
     volumes:
       - type : bind
         source: appdata/hello-1.0.war
-        target: /home/webapp/hello-1.0.war
+        target: /home/webapp
     depends_on:
       - buillder
 volumes:
