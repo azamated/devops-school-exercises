@@ -1,4 +1,4 @@
 FROM bitnami/tomcat
 WORKDIR /usr/local
-RUN cp ./hello-1.0.war ./tomcat/webapps/hello-1.0.war
+RUN cp ./hello-1.0.war /opt/bitnami/tomcat/webapps_default
 EXPOSE 8080
