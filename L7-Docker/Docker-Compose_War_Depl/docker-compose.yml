@@ -4,7 +4,7 @@ services:
     image: ringcentral/maven
     volumes:
       - appdata:/home/webapp:rw
-      - ./boxfuse-sample-java-war-hello:/home/webapp:rw
+      - ./boxfuse-sample-java-war-hello:/home/webapp/boxfuse-sample-java-war-hello:rw
     working_dir: /home/webapp/boxfuse-sample-java-war-hell
     command: sh -c "mvn package && cp target/hello-1.0.war /home/webapp/hello-1.0.war"
 
