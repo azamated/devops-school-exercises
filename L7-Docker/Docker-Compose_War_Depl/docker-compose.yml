@@ -14,7 +14,7 @@ services:
     volumes:
       - type: volume
         source: appdata
-        target: /home/webapp
+        target: /usr/local/tomcat/webapps
     depends_on:
       - buillder
 volumes:
