@@ -1,4 +1,4 @@
-vesrion: '2'
+vesrion: '3.2'
 services:
   buillder:
     build: appdata
@@ -9,6 +9,8 @@ services:
 
   production:
     image: rightctrl/tomcat:latest
+    ports:
+      - "8080:8080"
     volumes:
       - type: volume
         source: appdata/hello-1.0.war
