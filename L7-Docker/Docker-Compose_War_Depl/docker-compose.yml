@@ -17,5 +17,6 @@ services:
         target: /home/webapp
     depends_on:
       - buillder
+
 volumes:
   appdata:
