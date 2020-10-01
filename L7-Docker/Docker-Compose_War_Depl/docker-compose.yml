@@ -1,16 +1,17 @@
 version: '2'
 services:
   buillder:
-    build: builder
+    image: ringcentral/maven
     volumes:
-      - type: volume
-        source: appdata
-        target: /home/webapp
+      - appdata:/home/webapp:rw
+      - ./boxfuse-sample-java-war-hello:/home/webapp:rw
+    working_dir: /home/webapp/boxfuse-sample-java-war-hell
+    command: sh -c "mvn package && cp target/hello-1.0.war /home/webapp/hello-1.0.war"
 
   production:
-    build: prod
+    image: tomcat
     ports:
-      - "8080:8080"
+      - 8080:8080
     depends_on:
       - buillder
 
