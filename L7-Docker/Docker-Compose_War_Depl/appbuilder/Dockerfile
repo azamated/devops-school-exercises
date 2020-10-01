@@ -1,4 +1,4 @@
-FROM ringcentral/maven
+FROM maven
 RUN mkdir /home/webapp
 WORKDIR /home/webapp
 ADD ./boxfuse-sample-java-war-hello /home/webapp
