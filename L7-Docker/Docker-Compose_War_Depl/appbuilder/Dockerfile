@@ -3,7 +3,7 @@ RUN mkdir /home/webapp
 WORKDIR /home/webapp
 ADD ./boxfuse-sample-java-war-hello /home/webapp
 WORKDIR /home/webapp/boxfuse-sample-java-war-hello
-RUN mvn package && cp boxfuse-sample-java-war-hello/target/hello-1.0.war /home/webapp/hello-1.0.war
+RUN mvn package && cp ./target/hello-1.0.war /home/webapp/hello-1.0.war
 
 
 
