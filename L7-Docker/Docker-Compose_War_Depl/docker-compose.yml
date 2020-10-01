@@ -1,12 +1,12 @@
 version: '2'
 services:
   buillder:
-    image: appbuilder
+    build: appbuilder
     volumes:
       - appdata:/home/webapp:rw
 
   production:
-    image: prod
+    build: prod
     volumes:
       - appdata:/usr/local/tomcat/webapps:rw
     ports:
