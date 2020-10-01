@@ -1,0 +1,15 @@
+vesrion: '2'
+services:
+  buillder:
+    image: java:8-alpine
+    ports:
+      - "8080:8080"
+    volumes:
+      - type: volume
+        source: appdata
+        target: /home/
+      - ./appdata/:/var/lib/mysql
+
+
+volumes:
+  appdata:
