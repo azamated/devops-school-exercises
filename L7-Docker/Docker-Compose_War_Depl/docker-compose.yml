@@ -12,10 +12,10 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - type : bind
+      - type: bind
         source: appdata
         target: /home/webapp
     depends_on:
-      - appdata
+      - buillder
 volumes:
   appdata:
