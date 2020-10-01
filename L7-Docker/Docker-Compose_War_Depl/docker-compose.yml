@@ -13,8 +13,8 @@ services:
       - "8080:8080"
     volumes:
       - type: bind
-        source: /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data
-        target: /home/webapp
+        source: /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data/hello-1.0.war
+        target: /home/webapp/hello-1.0.war
     depends_on:
       - buillder
 volumes:
