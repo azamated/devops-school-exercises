@@ -12,7 +12,9 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./appdata/hello-1.0.war:/home/webapp/hello-1.0.war
+      - type: volume
+        source: appdata
+        target: /home/webapp
     depends_on:
       - buillder
 volumes:
