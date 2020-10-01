@@ -1,6 +1,6 @@
 FROM bitnami/tomcat
-WORKDIR /bitnami/tomcat/
-COPY ./hello-1.0.war ./data/hello-1.0.war
+#WORKDIR /bitnami/tomcat/
+#COPY ./hello-1.0.war ./data/hello-1.0.war
 #ORKDIR /bitnami/tomcat
 #RUN cp /bitnami/tomcat/hello-1.0.war bitnami/tomcat/data/hello-1.0.war
 #EXPOSE 8080
