@@ -5,7 +5,7 @@ services:
     volumes:
       - type: volume
         source: appdata
-        target: /home/webapp
+        target: /home/webapp/
 
   production:
     image: rightctrl/tomcat:latest
