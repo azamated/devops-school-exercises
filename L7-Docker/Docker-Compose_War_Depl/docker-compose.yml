@@ -13,7 +13,7 @@ services:
       - "8080:8080"
     volumes:
       - type: bind
-        source: /var/lib/docker/volumes/nginx-vol/docker-compose_war_depl_appdata/_data
+        source: /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data
         target: /home/webapp
     depends_on:
       - buillder
