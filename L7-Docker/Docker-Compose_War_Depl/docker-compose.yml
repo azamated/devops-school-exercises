@@ -13,9 +13,9 @@ services:
       - "8080:8080"
     volumes:
       - type : bind
-        source: appdata/hello-1.0.war
+        source: appdata
         target: /home/webapp
     depends_on:
-      - buillder
+      - appdata
 volumes:
   appdata:
