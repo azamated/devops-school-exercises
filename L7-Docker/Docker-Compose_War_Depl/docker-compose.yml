@@ -11,10 +11,6 @@ services:
     build: prod
     ports:
       - "8080:8080"
-    volumes:
-      - type: volume
-        source: appdata
-        target: /home/webapp
     depends_on:
       - buillder
 
