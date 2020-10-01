@@ -8,13 +8,13 @@ services:
         target: /home/webapp/
 
   production:
-    image: rightctrl/tomcat:latest
+    build: prod
     ports:
       - "8080:8080"
     volumes:
       - type: volume
         source: appdata
-        target: /usr/local/tomcat/webapps/
+        target: /home/webapp/
     depends_on:
       - buillder
 volumes:
