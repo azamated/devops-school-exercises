@@ -13,8 +13,8 @@ services:
       - "8080:8080"
     volumes:
       - type: volume
-        source: appdata/hello-1.0.war
-        target: /usr/local/tomcat/webapps/hello-1.0.war
+        source: appdata
+        target: /usr/local/tomcat/webapps/
 
 volumes:
   appdata:
