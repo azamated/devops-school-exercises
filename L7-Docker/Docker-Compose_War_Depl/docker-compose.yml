@@ -6,9 +6,9 @@ services:
       - appdata:/home/webapp/
 
   production:
-    image: bitnami/tomcat
+    build: prod
     volumes:
-      - appdata:/bitnami/tomcat/data
+      - appdata:/bitnami/tomcat/
     ports:
       - 8080:8080
     depends_on:
