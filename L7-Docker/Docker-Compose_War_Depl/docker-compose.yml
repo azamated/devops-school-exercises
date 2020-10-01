@@ -16,6 +16,6 @@ services:
         source: appdata
         target: /usr/local/tomcat/webapps/
     depends_on:
-      - appdata
+      - buillder
 volumes:
   appdata:
