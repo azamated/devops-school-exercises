@@ -8,7 +8,7 @@ services:
   production:
     build: prod
     volumes:
-      - appdata:/usr/local/tomcat/webapps:rw
+      - appdata:/usr/local/tomcat/webapps
     ports:
       - 8080:8080
     depends_on:
