@@ -1,5 +1,5 @@
 FROM rightctrl/tomcat:latest
 RUN mkdir /home/webapp
 WORKDIR /home/webapp
-RUN cp hello-1.0.war /usr/local/tomcat/webapps/
+RUN cp /home/webapp/hello-1.0.war /usr/local/tomcat/webapps/
 EXPOSE 8080
