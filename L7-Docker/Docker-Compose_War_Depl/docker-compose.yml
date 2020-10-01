@@ -6,9 +6,9 @@ services:
       - appdata:/home/webapp/
 
   production:
-    image: bitnami/tomcat
+    image: accordion/tomcat8
     volumes:
-      - /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data/hello-1.0.war:/bitnami/tomcat/data/hello-1.0.war
+      - /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data/hello-1.0.war:/usr/local/tomcat/webapps/hello-1.0.war
     ports:
       - 8080:8080
     depends_on:
