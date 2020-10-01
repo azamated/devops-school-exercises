@@ -3,12 +3,12 @@ services:
   buillder:
     build: appbuilder
     volumes:
-      - appdata:/home/webapp
+      - appdata:/home/webapp/
 
   production:
     build: prod
     volumes:
-      - appdata:/usr/local/tomcat/webapps
+      - /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data:/usr/local/tomcat/webapps
     ports:
       - 8080:8080
     depends_on:
