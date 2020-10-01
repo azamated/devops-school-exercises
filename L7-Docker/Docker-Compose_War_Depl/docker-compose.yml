@@ -1,7 +1,7 @@
 version: '2'
 services:
   buillder:
-    build: appdata
+    build: builder
     volumes:
       - type: volume
         source: appdata
