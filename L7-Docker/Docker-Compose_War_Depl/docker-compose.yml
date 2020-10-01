@@ -3,7 +3,7 @@ services:
   buillder:
     build: appbuilder
     volumes:
-      - appdata:/home/webapp:rw
+      - appdata:/home/webapp
 
   production:
     build: prod
