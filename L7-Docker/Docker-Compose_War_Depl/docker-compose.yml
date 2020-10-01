@@ -8,7 +8,7 @@ services:
   production:
     image: bitnami/tomcat
     volumes:
-      - /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data/hello-1.0.war:/opt/bitnami/tomcat/webapps_default/hello-1.0.war
+      - /var/lib/docker/volumes/docker-compose_war_depl_appdata/_data/hello-1.0.war:bitnami/tomcat/data/hello-1.0.war
     ports:
       - 8080:8080
     depends_on:
