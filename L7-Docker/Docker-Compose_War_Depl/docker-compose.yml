@@ -1,15 +1,18 @@
 vesrion: '2'
 services:
   buillder:
-    image: java:8-alpine
-    ports:
-      - "8080:8080"
+    build: appdata
     volumes:
       - type: volume
         source: appdata
-        target: /home/
-      - ./appdata/:/var/lib/mysql
+        target: /home/webapp
 
+  production:
+    image: rightctrl/tomcat:latest
+    volumes:
+      - type: volume
+        source: appdata/hello-1.0.war
+        target: /usr/local/tomcat/webapps/hello-1.0.war
 
 volumes:
   appdata:
