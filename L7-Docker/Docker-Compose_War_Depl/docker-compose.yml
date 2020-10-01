@@ -8,7 +8,7 @@ services:
         target: /home/webapp/
 
   production:
-    image: davidcaste/alpine-tomcat:tomcat8
+    image: rightctrl/tomcat:latest
     ports:
       - "8080:8080"
     volumes:
