@@ -11,8 +11,6 @@ services:
       - type: volume
         source: appdata
         target: /usr/local/tomcat/webapps
-    #volumes:
-    #  - appdata:/usr/local/tomcat/webapps
     ports:
       - 8080:8080
     depends_on:
