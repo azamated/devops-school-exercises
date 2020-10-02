@@ -6,7 +6,7 @@ services:
       - appdata:/home/webapp/
 
   production:
-    image: arm32v6/tomcat
+    image: arm64v8/tomcat
     volumes:
       - appdata:/usr/local/tomcat/webapps
     ports:
