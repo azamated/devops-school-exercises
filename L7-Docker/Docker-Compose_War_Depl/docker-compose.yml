@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   buillder:
     build: appbuilder
@@ -6,10 +6,13 @@ services:
       - appdata:/home/webapp/
 
   production:
-    #image: accordion/tomcat8:openjdk8
     build: prod
     volumes:
-      - appdata:/usr/local/tomcat/webapps
+      - type: volume
+        source: appdata
+        target: /usr/local/tomcat/webapps
+    #volumes:
+    #  - appdata:/usr/local/tomcat/webapps
     ports:
       - 8080:8080
     depends_on:
