@@ -6,7 +6,7 @@ services:
       - appdata:/home/webapp/
 
   production:
-    image: arm64v8/tomcat
+    image: accordion/tomcat8:openjdk8
     volumes:
       - appdata:/usr/local/tomcat/webapps
     ports:
