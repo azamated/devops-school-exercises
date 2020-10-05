@@ -18,11 +18,11 @@
   - name: Chnage working directory abd run java source code build
     shell: mvn package
     args:
-      chdir: /tmp/box/boxfuse-sample-java-war-hello
+      chdir: /tmp/box
 
   - name: Ensure war artifact is present on prod
     copy:
-      src: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      src: /tmp/box/target/hello-1.0.war
       dest: prod:/tmp
 
 - name: install tomcat
