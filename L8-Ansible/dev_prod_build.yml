@@ -21,8 +21,8 @@
       chdir: /tmp/box
 
   - name: Ensure war artifact is present on prod
-    copy:
-      src: root@dev:/tmp/box/target/hello-1.0.war
+    fetch:
+      src: /tmp/box/target/hello-1.0.war
       dest: prod:/tmp/hello-1.0.war
 
 - name: install tomcat
