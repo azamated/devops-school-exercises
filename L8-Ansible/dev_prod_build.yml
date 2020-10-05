@@ -46,6 +46,6 @@
       state: directory
 
   - name: Ensure war is present
-    copy:
+    fetch:
       src: /tmp/hello-1.0.war
       dest: /usr/local/tomcat/webapps
