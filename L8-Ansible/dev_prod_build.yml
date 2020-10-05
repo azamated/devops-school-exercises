@@ -38,7 +38,7 @@
 
   - name: Ensure tomcat is installed
     apt:
-      name: tomcat
+      name: tomcat9
       state: present
 
   - name: Ensure tomcat directory exists
