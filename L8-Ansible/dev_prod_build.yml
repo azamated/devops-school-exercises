@@ -41,12 +41,7 @@
       name: tomcat9
       state: present
 
-  - name: Ensure tomcat directory exists
-    file:
-      path: /usr/local/tomcat
-      state: directory
-
   - name: Ensure war is present
     copy:
       src: /tmp/hello-1.0.war
-      dest: usr/local/tomcat/webapps
+      dest: /var/lib/tomcat9/webapps
