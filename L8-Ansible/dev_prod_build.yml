@@ -13,7 +13,7 @@
     git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
       version: master
-      dest: /tmp
+      dest: /tmp/box
       accept_hostkey: yes
 
   - name: Chnage working directory abd run java source code build
