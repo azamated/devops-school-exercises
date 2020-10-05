@@ -6,9 +6,53 @@
   tasks:
   - name: Ensure maven is installed
     apt: 
-    name: maven
-    state: present
+      name: maven
+      state: present
 
-  - nME 
+  - name: Ensure jave source code is present
+    git:
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /tmp
 
-- name:  
+  - name: Chnage working directory abd run java source code build
+    shell: mvn package
+    args:
+      chdir: /tmp/boxfuse-sample-java-war-hello
+
+- name: install tomcat
+  hosts: dev
+  bocome: yes
+
+  tasks:
+  - name: Ensure Java is installed
+    apt:
+      name: java
+      state: present
+
+  - name: Ensure default-jdk is installed
+    apt:
+      name: java
+      state: present
+
+  - name: Ensure tomcat direcroty exists
+    apt:
+      name: java
+      state: present
+
+
+
+  - name: Ensure jave source code is present
+    git:
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /tmp
+
+  - name: Chnage working directory abd run java source code build
+    shell: mvn package
+    args:
+      chdir: /tmp/boxfuse-sample-java-war-hello
+
+
+
+
+
+  - name: Copy war artifact to the web server
