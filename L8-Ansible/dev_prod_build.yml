@@ -29,15 +29,9 @@
   hosts: prod
   become: yes
 
-  tasks:
-  - name: Ensure Java is installed
-    apt:
-      name: java
-      state: present
-
   - name: Ensure default-jdk is installed
     apt:
-      name: java
+      name: default-jdk
       state: present
 
   - name: Ensure tomcat directory exists
