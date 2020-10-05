@@ -23,7 +23,8 @@
   - name: Ensure war artifact is present on prod
     fetch:
       src: /tmp/box/target/hello-1.0.war
-      dest: prod:/tmp/hello-1.0.war
+      dest: /tmp/hello-1.0.war
+      flat: yes
 
 - name: install tomcat
   hosts: prod
@@ -46,6 +47,6 @@
       state: directory
 
   - name: Ensure war is present
-    fetch:
+    copy:
       src: /tmp/hello-1.0.war
-      dest: /usr/local/tomcat/webapps
+      dest: usr/local/tomcat/webapps
