@@ -1,7 +1,7 @@
 ---
 - name: install maven
   hosts: dev
-  bocome: yes
+  become: yes
 
   tasks:
   - name: Ensure maven is installed
@@ -26,7 +26,7 @@
 
 - name: install tomcat
   hosts: prod
-  bocome: yes
+  become: yes
 
   tasks:
   - name: Ensure Java is installed
