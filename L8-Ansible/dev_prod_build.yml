@@ -12,7 +12,7 @@
   - name: Ensure jave source code is present
     git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /tmp
+      dest: /tmp/
 
   - name: Chnage working directory abd run java source code build
     shell: mvn package
