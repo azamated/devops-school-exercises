@@ -1,0 +1,14 @@
+---
+- name: install maven
+  hosts: dev
+  bocome: yes
+
+  tasks:
+  - name: Ensure maven is installed
+    apt: 
+    name: maven
+    state: present
+
+  - nME 
+
+- name:  
