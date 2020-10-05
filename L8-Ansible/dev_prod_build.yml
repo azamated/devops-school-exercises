@@ -19,8 +19,13 @@
     args:
       chdir: /tmp/boxfuse-sample-java-war-hello
 
+  - name: Ensure war artifact is present on prod
+    copy:
+      src: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      dest: prod:/tmp
+
 - name: install tomcat
-  hosts: dev
+  hosts: prod
   bocome: yes
 
   tasks:
@@ -34,25 +39,12 @@
       name: java
       state: present
 
-  - name: Ensure tomcat direcroty exists
-    apt:
-      name: java
-      state: present
+  - name: Ensure tomcat directory exists
+    file:
+      path: /usr/local/tomcat
+      state: directory
 
-
-
-  - name: Ensure jave source code is present
-    git:
-      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /tmp
-
-  - name: Chnage working directory abd run java source code build
-    shell: mvn package
-    args:
-      chdir: /tmp/boxfuse-sample-java-war-hello
-
-
-
-
-
-  - name: Copy war artifact to the web server
+  - name: Ensure war is present
+    copy:
+      src: /tmp/hello-1.0.war
+      dest: /usr/local/tomcat/webapps
