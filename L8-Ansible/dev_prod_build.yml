@@ -22,7 +22,7 @@
 
   - name: Ensure war artifact is present on prod
     copy:
-      src: dev:/tmp/box/target/hello-1.0.war
+      src: root@dev:/tmp/box/target/hello-1.0.war
       dest: prod:/tmp/hello-1.0.war
 
 - name: install tomcat
