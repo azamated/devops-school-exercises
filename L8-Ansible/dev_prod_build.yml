@@ -36,10 +36,10 @@
 
   - name: Ensure tomcat is installed
     apt:
-      name: tomcat9
+      name: tomcat8
       state: present
 
   - name: Ensure war is present
     copy:
       src: /tmp/hello-1.0.war
-      dest: /var/lib/tomcat9/webapps/hello-1.0.war
+      dest: /var/lib/tomcat8/webapps/hello-1.0.war
