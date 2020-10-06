@@ -16,9 +16,7 @@
       dest: /tmp/box
 
   - name: Chnage working directory abd run java source code build
-    shell: mvn package
-    args:
-      chdir: /tmp/box
+    command: mvn package -f /tmp/box/boxfuse-sample-java-war-hello
 
   - name: Ensure war artifact is present on prod
     fetch:
