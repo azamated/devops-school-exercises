@@ -16,7 +16,7 @@
       dest: /tmp/box
 
   - name: Chnage working directory abd run java source code build
-    command: mvn package -f /tmp/box/boxfuse-sample-java-war-hello
+    command: mvn package -f /tmp/box
 
   - name: Ensure war artifact copied
     fetch:
