@@ -15,10 +15,10 @@
       version: master
       dest: /tmp/box
 
-  - name: Chnage working directory abd run java source code build
+  - name: Build java source code with maven
     command: mvn package -f /tmp/box
 
-  - name: Ensure war artifact copied
+  - name: Ensure war artifact copied to master
     fetch:
       src: /tmp/box/target/hello-1.0.war
       dest: /tmp/hello-1.0.war
