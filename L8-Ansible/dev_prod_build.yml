@@ -18,7 +18,7 @@
   - name: Chnage working directory abd run java source code build
     command: mvn package -f /tmp/box/boxfuse-sample-java-war-hello
 
-  - name: Ensure war artifact is present on prod
+  - name: Ensure war artifact copied
     fetch:
       src: /tmp/box/target/hello-1.0.war
       dest: /tmp/hello-1.0.war
@@ -42,4 +42,4 @@
   - name: Ensure war is present
     copy:
       src: /tmp/hello-1.0.war
-      dest: /var/lib/tomcat9/webapps
+      dest: /var/lib/tomcat9/webapps/hello-1.0.war
