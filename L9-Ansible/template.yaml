@@ -20,6 +20,6 @@
 
 
   handlers:
-  - nane: restart nginx
+  - name: restart nginx
     service: name=nginx state=restarted
 
