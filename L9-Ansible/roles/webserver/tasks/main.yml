@@ -1,0 +1,13 @@
+---
+# tasks file for webserver
+- name: Ensure nginz package is present 
+  apt:
+    name: nginx
+    state: present
+
+
+- name: Ensure index.html is present
+  copy: src=index.html dest={{ dest_folder }}/index.html mode=0555
+  notify:
+   - restart nginx
+
