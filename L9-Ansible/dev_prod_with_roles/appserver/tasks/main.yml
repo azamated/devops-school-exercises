@@ -1,2 +1,11 @@
 ---
 # tasks file for appserver
+- name: Installjava and tomcat
+  apt: name={{items}} state=installed
+  with_items:
+    - default-jdk
+    - java8
+- name: Ensure war is present
+  copy:
+    src: /tmp/hello-1.0.war
+    dest: /var/lib/tomcat8/webapps/hello-1.0.war

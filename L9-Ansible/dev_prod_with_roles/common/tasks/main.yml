@@ -1,2 +1,8 @@
 ---
 # tasks file for common
+- name: Install base software
+  apt: name={{items}} state=installed
+  with_items:
+    - update
+    - mc
+    - git
