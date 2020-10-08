@@ -1,7 +1,10 @@
 ---
 # tasks file for common
-- name: Update apt repos
-  command: apt update
+- name: Update apt packages
+  become: true
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
 
 - name: Install base software
   apt: name={{item}} state=present
