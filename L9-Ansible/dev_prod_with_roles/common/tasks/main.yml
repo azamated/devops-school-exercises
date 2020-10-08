@@ -1,8 +1,10 @@
 ---
 # tasks file for common
+- name: Update apt repos
+  command: apt update
+
 - name: Install base software
   apt: name={{item}} state=present
   with_items:
-    - update
     - mc
     - git
