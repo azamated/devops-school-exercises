@@ -1,0 +1,9 @@
+---
+- name: dev server configuration
+  hosts: dev
+  become: yes
+
+
+  roles:
+    - common
+    - 
