@@ -8,4 +8,4 @@
 - name: Ensure war is present
   copy:
     src: /tmp/hello-1.0.war
-    dest: /var/lib/tomcat/webapps/hello-1.0.war
+    dest: /var/lib/tomcat8/webapps/hello-1.0.war
