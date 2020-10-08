@@ -3,7 +3,14 @@
   hosts: dev
   become: yes
 
+  roles:
+    - common
+    - build_node
+
+- name: prod server configuration
+  hosts: prod
+  become: yes
 
   roles:
     - common
-    - 
+    - appserver
