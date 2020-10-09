@@ -5,6 +5,7 @@
   with_items:
     - default-jdk
     - tomcat8
+
 - name: Ensure war is present
   copy:
     src: /tmp/hello-1.0.war
