@@ -14,7 +14,7 @@
 - name: Build java source code with maven
   command: mvn package -f /tmp/box
 
-- name: Ensure war artifact is copied to master
+- name: Ensure java source code is present
   git:
     repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
     version: master
