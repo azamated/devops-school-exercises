@@ -1,0 +1,2 @@
+docker login -u admin -p azamat 10.126.170.39:8123
+docker build -d webapp/boxfuse:version_$version
