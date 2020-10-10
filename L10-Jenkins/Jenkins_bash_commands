@@ -1,0 +1,8 @@
+mkdir /home/azamat/build
+apt update && apt install -y docker.io
+cd /home/azamat/build
+wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/L10-Jenkins/Dockerfile
+docker build -t boxfuse:version_$version  .
+docker tag boxfuse:version_$version 10.126.170.39:8123/webapp/boxfuse:version_$version
+docker login -u admin -p azamat 10.126.170.39:8123
+docker push 10.126.170.39:8123/webapp/boxfuse:version_$version
