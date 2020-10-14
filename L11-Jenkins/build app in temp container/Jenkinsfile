@@ -18,10 +18,18 @@ pipeline {
         stage ('get Dockerfile') {
             steps   {
                 sh 'cd /tmp && wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/L11-Jenkins/build app in temp container/Dockerfile_prod'
-                sh 'cp /target/*.war'
+                sh 'mv Dockerfile_prod Dockerfile
+                sh 'docker build -t javaapp1 .'
+                sh 'docker tag javaapp1:version1 javaapp1/version1'
+                sh 'docker push azamated/javaapp1:version1'
                 }
             }
-
+        stage ('Deploy app in production')  {
+            steps   {
+            sh 'ssh root@13.90.24.179'
+            sh 'docker run -d javaapp1:version1 -p 8080:8080'
+            }
+        }
 
         }
     }
