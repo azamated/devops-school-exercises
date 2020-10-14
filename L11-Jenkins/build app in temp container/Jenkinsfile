@@ -9,11 +9,13 @@ pipeline {
             steps {
                 git 'https://github.com/azamated/boxfuse-sample-java-war-hello.git'
             }
+
         stage ('build') {
             steps   {
                 sh 'mvn package'
                 }
             }
+
         stage ('get Dockerfile') {
             steps   {
                 sh 'cd /tmp && wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/L11-Jenkins/build%20app%20in%20temp%20container/Dockerfile_prod'
@@ -23,6 +25,7 @@ pipeline {
                 sh 'docker push azamated/javaapp1'
                 }
             }
+
         stage ('Deploy app in production')  {
             steps   {
             sh 'ssh root@13.90.24.179'
