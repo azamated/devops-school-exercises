@@ -9,7 +9,7 @@ pipeline {
             steps {
                 git 'https://github.com/azamated/boxfuse-sample-java-war-hello.git'
             }
-
+        }
         stage ('build') {
             steps   {
                 sh 'mvn package'
@@ -35,6 +35,7 @@ pipeline {
 
         }
     }
+}
 }
 
 
