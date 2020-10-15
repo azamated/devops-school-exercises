@@ -1,8 +1,7 @@
-FROM ubuntu:latest
+FROM openjdk:8u151-stretch
 # Install pacakges
 RUN apt-get update
 
-RUN mkdir -p /root/.ssh
 COPY /root/.ssh/id_rsa /root/.ssh/id_rsa
 
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
