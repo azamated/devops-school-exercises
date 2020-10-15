@@ -1,4 +1,8 @@
 FROM ubuntu:latest
+#Add private key
+COPY id_rsa /root/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa
+
 # Install pacakges
 RUN apt-get update
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
