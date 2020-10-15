@@ -1,3 +1,2 @@
 FROM tomcat
-VOLUME /var/run/docker.sock:/var/run/docker.sock
 ADD boxfuse-sample-java-war-hello/target/*.war /usr/local/tomcat/webapps/
