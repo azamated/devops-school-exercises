@@ -19,7 +19,7 @@ pipeline {
         stage ('get Dockerfile') {
             steps   {
                 sh 'wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/L11-Jenkins/buildAppInDcokerImage/Dockerfile_prod && mv Dockerfile_prod Dockerfile'
-                sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -t javaapp1 .'
+                sh 'docker build -v /var/run/docker.sock:/var/run/docker.sock -t javaapp1 .'
                 sh 'docker tag javaapp1 azamated/javaapp1:version1'
                 sh 'docker push azamated/javaapp1'
                 }
