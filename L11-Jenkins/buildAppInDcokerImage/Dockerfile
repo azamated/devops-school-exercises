@@ -1,8 +1,8 @@
-FROM openjdk:8u151-stretch
-# Install pacakges
-RUN apt-get update
+FROM openjdk:14.0.2-jdk-buster
 
-COPY id_rsa /root/.ssh/id_rsa
+RUN apt update
+
+ADD id_rsa /root/.ssh/id_rsa
 
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 RUN apt-get install -y default-jdk && apt-get install -y maven && apt-get install -y git && apt-get install -y wget
