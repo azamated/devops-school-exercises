@@ -3,7 +3,8 @@ FROM openjdk:14.0.2-jdk-buster
 RUN apt update
 
 #Add private key
-ADD id_rsa /root/.ssh/id_rsa
+RUN mkdir /root/.ssh
+ADD /root/.ssh/id_rsa /root/.ssh/
 
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
