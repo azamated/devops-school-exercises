@@ -1,7 +1,6 @@
 FROM ubuntu:latest
 #Add private key
-COPY id_rsa /root/.ssh/id_rsa
-RUN chmod 600 /root/.ssh/id_rsa
+ADD id_rsa /root/.ssh/id_rsa
 
 # Install pacakges
 RUN apt-get update
