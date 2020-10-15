@@ -2,7 +2,7 @@ pipeline {
     agent   {
         docker  {
             image 'azamated/maven:version5'
-            args '-v /var/run/docker.sock:/var/run/docker.sock
+            args '-v /var/run/docker.sock:/var/run/docker.sock -u root:docker'
         }
     }
     stages  {
