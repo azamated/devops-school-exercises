@@ -1,4 +1,4 @@
-FROM openjdk:14.0.2-jdk-buster
+FROM openjdk
 
 # Update repo
 RUN apt-get update
