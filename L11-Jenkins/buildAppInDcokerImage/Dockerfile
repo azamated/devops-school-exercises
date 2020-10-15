@@ -1,11 +1,10 @@
-FROM ubuntu
+FROM openjdk:14.0.2-jdk-buster
 
-# Update repo
-RUN apt-get update
-# SSH key
-RUN mkdir -p /root/.ssh
-RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
-VOLUME [ "/root/.ssh" ]
+RUN apt update
+
+#Add private key
+ADD id_rsa /root/.ssh/id_rsa
+
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 RUN apt-get install -y maven && apt-get install -y git && apt-get install -y wget
@@ -18,6 +17,6 @@ RUN apt-get install -y \
     software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 RUN apt-key fingerprint 0EBFCD88
-RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 RUN apt-get update
 RUN apt-get install -y docker-ce docker-ce-cli containerd.io
