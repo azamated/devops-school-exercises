@@ -1,3 +1,2 @@
 FROM tomcat
 ADD boxfuse-sample-java-war-hello/target/*.war /usr/local/tomcat/webapps/
-EXPOSE 2375
