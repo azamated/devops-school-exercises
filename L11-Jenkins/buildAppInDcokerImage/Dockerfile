@@ -17,5 +17,5 @@ RUN add-apt-repository \
    $(lsb_release -cs) \
    stable"
 RUN apt-get update
-RUN apt-get install -y docker-ce docker-ce-cli containerd
+RUN apt-get install -y docker-ce docker-ce-cli containerd.io
 USER root
