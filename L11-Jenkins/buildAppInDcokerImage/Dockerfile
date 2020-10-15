@@ -1,13 +1,13 @@
-FROM openjdk:latest
+FROM openjdk:14.0.2-jdk-buster
 
-RUN apt update
+RUN apt-get update
 
 RUN mkdir -p /root/.ssh
 RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
 VOLUME [ "/root/.ssh" ]
 
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
-RUN apt-get install -y default-jdk && apt-get install -y maven && apt-get install -y git && apt-get install -y wget
+RUN apt-get apt-get install -y maven && apt-get install -y git && apt-get install -y wget
 # Install docker-ce (official way)
 RUN apt-get install -y \
     apt-transport-https \
