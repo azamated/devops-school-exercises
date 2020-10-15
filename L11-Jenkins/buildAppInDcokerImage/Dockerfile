@@ -1,10 +1,11 @@
-FROM openjdk:14.0.2-jdk-buster
+FROM openjdk:11-jdk
 
-RUN apt update
-
-#Add private key
-RUN mkdir /root/.ssh && cp /root/.ssh/id_rsa /root/.ssh/
-
+# Update repo
+RUN apt-get update
+# SSH key
+RUN mkdir -p /root/.ssh
+RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
+VOLUME [ "/root/.ssh" ]
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 RUN apt-get install -y maven && apt-get install -y git && apt-get install -y wget
