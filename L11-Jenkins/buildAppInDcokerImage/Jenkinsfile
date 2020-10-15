@@ -1,7 +1,7 @@
 pipeline {
     agent   {
         docker  {
-            image 'azamated/maven:version6'
+            image 'azamated/maven:version7'
             args '-v /var/run/docker.sock:/var/run/docker.sock -u root:docker'
         }
     }
