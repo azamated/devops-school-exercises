@@ -29,7 +29,8 @@ pipeline {
         stage ('Deploy app in production')  {
             steps   {
             sh 'ssh root@13.90.24.179'
-            sh 'docker run -d javaapp1:version1 -p 8080:8080'
+            sh 'docker login -u azamated -p Azamated@2020cbfq'
+            sh 'docker run -d azamated/javaapp1:version1 -p 8080:8080'
             }
         }
 
