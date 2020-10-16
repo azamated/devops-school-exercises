@@ -7,7 +7,7 @@ RUN apt-get update
 #RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
 #VOLUME [ "/root/.ssh" ]
 #Add private key
-ADD /root/.ssh/id_rsa /root/.ssh/
+ADD id_rsa /root/.ssh/id_rsa
 
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
