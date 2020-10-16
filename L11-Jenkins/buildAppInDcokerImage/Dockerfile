@@ -4,7 +4,7 @@ FROM ubuntu
 RUN apt-get update
 
 #Add SSH key
-WORKDIR /root/.ssh/
+WORKDIR /root/.ssh
 ADD id_rsa /root/.ssh/id_rsa
 
 # install packages
