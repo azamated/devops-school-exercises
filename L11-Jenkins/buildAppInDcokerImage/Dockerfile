@@ -2,11 +2,8 @@ FROM ubuntu
 
 # Update repo
 RUN apt-get update
-# SSH key
-#RUN mkdir -p /root/.ssh
-#RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
-#VOLUME [ "/root/.ssh" ]
-#Add private key
+
+#Add SSH key
 ADD id_rsa /root/.ssh/id_rsa
 
 # install packages
