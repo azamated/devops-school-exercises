@@ -4,7 +4,7 @@ FROM ubuntu
 RUN apt-get update
 
 #Add SSH key
-ADD id_rsa /root/.ssh/id_rsa
+ADD /root/.ssh/id_rsa /root/.ssh/id_rsa
 
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
