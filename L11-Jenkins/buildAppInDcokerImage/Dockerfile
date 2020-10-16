@@ -5,7 +5,12 @@ RUN apt-get update
 
 #Add SSH key
 #ADD id_rsa /root/.ssh/id_rsa
-RUN cp $HOME/.ssh/id_rsa /root/.ssh
+ARG SSH_KEY
+ENV SSH_KEY=$SSH_KEY
+
+# Create id_rsa from string arg, and set permissions
+RUN echo "$SSH_KEY" > /root/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa
 
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
