@@ -3,9 +3,12 @@ FROM ubuntu
 # Update repo
 RUN apt-get update
 # SSH key
-RUN mkdir -p /root/.ssh
-RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
-VOLUME [ "/root/.ssh" ]
+#RUN mkdir -p /root/.ssh
+#RUN  echo "    IdentityFile /root/.ssh/id_rsa" >> /etc/ssh/ssh_config
+#VOLUME [ "/root/.ssh" ]
+#Add private key
+ADD /root/.ssh/id_rsa /root/.ssh/
+
 # install packages
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
 RUN apt-get install -y maven && apt-get install -y git && apt-get install -y wget
