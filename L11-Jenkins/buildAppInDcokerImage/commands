@@ -1,3 +1,0 @@
-docker build -t maven .
-docker tag 83ccf5ef8a46 azamated/builder:version1
-docker push azamated/builder
