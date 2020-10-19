@@ -29,8 +29,8 @@ pipeline {
         stage ('Deploy app in production')  {
             steps   {
             sh '''ssh-keyscan -H 13.90.24.179 >> ~/.ssh/known_hosts \
-            ssh root@13.90.24.179 'docker login -u azamated -p SKA6XPS6FPOC2RO4 \
-            ssh root@13.90.24.179 'docker run -d -p 8080:8080 azamated/javaapp1:version2 '''
+            && ssh root@13.90.24.179 docker login -u azamated -p SKA6XPS6FPOC2RO4 \
+            && ssh root@13.90.24.179 docker run -d -p 8080:8080 azamated/javaapp1:version2 '''
             }
         }
 
