@@ -51,7 +51,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: dev_build_server
+        id: prod_build_server
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
