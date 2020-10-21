@@ -34,7 +34,7 @@
             from_port: 8080
             to_port: 8080
             cidr_ip: 0.0.0.0/0
-    - name: Provision a builder node
+
 
     #Create Security Groups
     - name: Ensure a builder node is provisioned
