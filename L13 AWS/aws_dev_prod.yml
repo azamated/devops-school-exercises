@@ -1,3 +1,6 @@
+#-----------------
+#Provision instances
+#-----------------
 - hosts: localhost
   connection: local
   gather_facts: False
@@ -84,7 +87,9 @@
         state: started
       with_items: "{{ webappinstances.instances }}"
 
-    #Install packages
+#-----------------
+#Install packages
+#-----------------
 - name: Configure EC2 instance
   hosts: awsBuilder
   become: yes
