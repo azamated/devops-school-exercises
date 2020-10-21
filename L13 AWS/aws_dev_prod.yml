@@ -2,32 +2,18 @@
   connection: local
   gather_facts: False
 
-  vars:
-    key_name: my-key
-    region: us-east-2
-    image: ami-07efac79022b86107
+
 
   tasks:
 
 
     - name: Provision a builder node
       ec2:
-        key_name: "{{ key_name }}"
+        key_name: my-key
         instance_type: t2.micro
-        image: "{{ image }}"
+        image: ami-07efac79022b86107
         wait: yes
         id: dev_build_server
-        region: "{{ region }}"
+        region: us-east-2
         group: BuilderAppSecurityGroup
-        count: 1
-
-    - name: Provision a prod node
-      ec2:
-        key_name: "{{ key_name }}"
-        instance_type: t2.micro
-        image: "{{ image }}"
-        wait: yes
-        id: prod_build_server
-        region: "{{ region }}"
-        group: ProdAppSecurityGroup
         count: 1
