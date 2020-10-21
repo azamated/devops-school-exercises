@@ -68,7 +68,5 @@
       with_items: "{{ awsBuilder.instances }}"
 
     - name: Add public IP of production
-      add_host:
-        hostname={{ item.public_ip }}
-        groups=webapphosts
-      with_items: "{{ awsProduction.instances }}"
+      add_host: hostname={{ awsProduction.instances.public_ip }}
+      with_dict: dict
