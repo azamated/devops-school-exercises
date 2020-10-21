@@ -64,8 +64,5 @@
     - name: Add public IP of builder
       add_host: hostname=awsBuilder.instances.public_ip groups=awsBuilder
 
-    - name: Add public IP of production
-      add_host:
-        hostname={{ item.public_ip }}
-        groups=awsProduction
-      with_items: "{{ awsProduction.instances }}"
+    - name: Add public IP of builder
+      add_host: hostname=awsProduction.instances.public_ip groups=awsProduction
