@@ -36,7 +36,7 @@
 
     - name: Provision a builder node
       ec2:
-        key_name: my-key
+        key_name: "{{ key_name }}"
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
@@ -47,7 +47,7 @@
 
     - name: Provision a prod node
       ec2:
-        key_name: my-key
+        key_name: "{{ key_name }}"
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
