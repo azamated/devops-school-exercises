@@ -44,7 +44,8 @@
         wait: yes
         id: dev_build_server
         region: "{{ region }}"
-        group: "{{ sec_gr_builder }}"
+        group_id: "{{ sec_gr_builder.group_id }}"
+        #group: "{{ sec_gr_builder }}"
         count: 1
 
     - name: Provision a prod node
@@ -55,5 +56,6 @@
         wait: yes
         id: prod_build_server
         region: "{{ region }}"
-        group: "{{ sec_gr_prod }}"
+        group_id: "{{ sec_gr_prod.group_id }}"
+        #group: sec_gr_prod
         count: 1
