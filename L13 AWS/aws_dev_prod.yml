@@ -42,7 +42,7 @@
         wait: yes
         id: dev_build_server
         region: "{{ region }}"
-        group: BuilderAppSecurityGroup
+        group: "{{ BuilderAppSecurityGroup }}"
         count: 1
 
     - name: Provision a prod node
@@ -53,5 +53,5 @@
         wait: yes
         id: prod_build_server
         region: "{{ region }}"
-        group: ProdAppSecurityGroup
+        group: "{{ ProdAppSecurityGroup }}"
         count: 1
