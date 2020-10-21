@@ -55,5 +55,3 @@
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
-
-    - name:
