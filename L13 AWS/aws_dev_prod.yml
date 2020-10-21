@@ -69,4 +69,3 @@
 
     - name: Add public IP of production
       add_host: hostname={{ awsProduction.instances.public_ip }}
-      with_dict: dict
