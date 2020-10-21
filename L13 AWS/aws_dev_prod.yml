@@ -50,7 +50,6 @@
         group: BuilderAppSecurityGroup
         count: 1
       register: awsBuilder
-      register: webappinstances
 
     - name: Ensure a production node is provisioned
       ec2:
@@ -63,8 +62,6 @@
         group: ProdAppSecurityGroup
         count: 1
       register: awsProduction
-      register: webappinstances
-
 
     #Get AWS instance Public IPs and Add to Ansible Hosts
     - name: Add public IP of builder
@@ -72,10 +69,6 @@
 
     - name: Add public IP of builder
       add_host: hostname=awsProduction.instances.public_ip groups=awsProduction
-
-    - name: Add all public IPs
-      add_host: hostname={{ item.public_ip }} groups=webappinstances
-      with_items: webappinstances.instances
 
     #Wait until instances start
     - name: Wait for SSH to come up
@@ -85,7 +78,16 @@
         delay: 60
         timeout: 320
         state: started
-      with_items: "{{ webappinstances.instances }}"
+      with_items: "{{ awsBuilder.instances }}"
+
+    - name: Wait for SSH to come up
+      wait_for:
+        host: "{{ item.public_dns_name }}"
+        port: 22
+        delay: 60
+        timeout: 320
+        state: started
+      with_items: "{{ awsProduction.instances }}"
 
 #-----------------
 #Install packages
