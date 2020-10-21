@@ -10,5 +10,6 @@
         image: ami-07efac79022b86107
         wait: yes
         id: dev_build_server
+        region: us-east-2
         group: EC2SecurityGroup
         count: 1
