@@ -3,12 +3,12 @@
   gather_facts: False
 
   tasks:
-    # Provision a dev builder node
-    - ec2:
-      key_name: my-key
-      instance_type: t2.micro
-      image: ami-07efac79022b86107
-      wait: yes
-      id: dev_build_server
-      group: EC2SecurityGroup
-      count: 1
+    - name: Provision a dev builder node
+      ec2:
+        key_name: my-key
+        instance_type: t2.micro
+        image: ami-07efac79022b86107
+        wait: yes
+        id: dev_build_server
+        group: EC2SecurityGroup
+        count: 1
