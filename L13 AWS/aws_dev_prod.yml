@@ -85,12 +85,12 @@
       with_items: "{{ webappinstances.instances }}"
 
     #Install packages
-    - name: Configure EC2 instance
-      hosts: awsBuilder
-      become: yes
-      gather_facts: False
-      tasks:
-       - name: Ensure docker is installed
-         apt:
-         name: docker.io
-         state: present
+- name: Configure EC2 instance
+  hosts: awsBuilder
+  become: yes
+  gather_facts: False
+  tasks:
+    - name: Ensure docker is installed
+      apt:
+        name: docker.io
+        state: present
