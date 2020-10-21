@@ -18,6 +18,7 @@
             from_port: 22
             to_port: 22
             cidr_ip: 0.0.0.0/0
+      register: sec_gr_builder
 
     - name: Create security group for Production node
       ec2_group:
@@ -33,6 +34,7 @@
             from_port: 8080
             to_port: 8080
             cidr_ip: 0.0.0.0/0
+      register: sec_gr_prod
 
     - name: Provision a builder node
       ec2:
@@ -42,7 +44,7 @@
         wait: yes
         id: dev_build_server
         region: "{{ region }}"
-        group: "{{ BuilderAppSecurityGroup }}"
+        group: "{{ sec_gr_builder }}"
         count: 1
 
     - name: Provision a prod node
@@ -53,5 +55,5 @@
         wait: yes
         id: prod_build_server
         region: "{{ region }}"
-        group: "{{ ProdAppSecurityGroup }}"
+        group: "{{ sec_gr_prod }}"
         count: 1
