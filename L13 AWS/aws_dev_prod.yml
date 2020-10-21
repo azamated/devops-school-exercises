@@ -8,31 +8,7 @@
     image: ami-07efac79022b86107
 
   tasks:
-    - name: Create security group for Builer node
-      ec2_group:
-        name: BuilderAppSecurityGroup
-        description: Security group for Java App Bilder node with port 22 enabled
-        region: "{{region}}"
-        rules:
-          - proto: tcp
-            from_port: 22
-            to_port: 22
-            cidr_ip: 0.0.0.0/0
 
-    - name: Create security group for Production node
-      ec2_group:
-        name: ProdAppSecurityGroup
-        description: Security group for Production node with ports 22 and 8080 enabled
-        region: "{{ region }}"
-        rules:
-          - proto: tcp
-            from_port: 22
-            to_port: 22
-            cidr_ip: 0.0.0.0/0
-          - proto: tcp
-            from_port: 8080
-            to_port: 8080
-            cidr_ip: 0.0.0.0/0
 
     - name: Provision a builder node
       ec2:
