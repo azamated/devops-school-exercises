@@ -1,0 +1,14 @@
+#install Ansible 2.9 (required for ansible collection)
+sudo apt install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install ansible
+
+#install python-pip and boto
+apt install -y python-pip
+pip install boto
+
+#install aws plugin for ansible (requires ansible 2.9)
+ansible-galaxy collection install amazon.aws
+
+aws ec2 describe-vpcs
