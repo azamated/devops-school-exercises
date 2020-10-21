@@ -63,9 +63,9 @@
     #Get AWS instance Public IPs and Add to Ansible Hosts
     - name: Add public IP of builder
       add_host:
-        hostname={{ item.public_ip }}
+        hostname=awsBuilder.instances.public_ip
         groups=awsBuilder
-      with_items: "{{ awsBuilder.instances }}"
+      #with_items: "{{ awsBuilder.instances }}"
 
     - name: Add public IP of production
       add_host:
