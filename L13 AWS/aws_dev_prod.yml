@@ -2,10 +2,7 @@
   connection: local
   gather_facts: False
 
-
-
   tasks:
-
 
     - name: Provision a builder node
       ec2:
@@ -15,5 +12,5 @@
         wait: yes
         id: dev_build_server
         region: us-east-2
-        group: BuilderAppSecurityGroup
+        group: EC2SecurityGroup
         count: 1
