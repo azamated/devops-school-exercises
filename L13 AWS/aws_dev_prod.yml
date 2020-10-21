@@ -3,12 +3,11 @@
   gather_facts: False
 
   vars:
-  key_name: my-key
-  region: us-east-2
-  image: ami-07efac79022b86107
+    key_name: my-key
+    region: us-east-2
+    image: ami-07efac79022b86107
 
   tasks:
-
     - name: Provision a builder node
       ec2:
         key_name: "{{ key_name }}"
