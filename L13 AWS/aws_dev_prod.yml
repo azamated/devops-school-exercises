@@ -35,7 +35,6 @@
             to_port: 8080
             cidr_ip: 0.0.0.0/0
 
-
     #Create Security Groups
     - name: Ensure a builder node is provisioned
       ec2:
@@ -59,8 +58,7 @@
         group: ProdAppSecurityGroup
         count: 1
 
-
     #Get AWS instance Public IPs and Add to Ansible Hosts
     - name: Add all instance public IPs to host group
-      add_host: hostname={{ item.public_ip }} groups=ec2hosts
-      with_items: "{{ ec2.instances }}"
+      add_host: hostname={{ item.public_ip }}
+      loop: "{{ ec2.instances }}"
