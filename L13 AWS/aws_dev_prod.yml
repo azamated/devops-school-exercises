@@ -76,13 +76,13 @@
 
     #Wait until instances start
     - name: Wait for SSH to come up
-        wait_for:
-          host: "{{ item.public_dns_name }}"
-          port: 22
-          delay: 60
-          timeout: 320
-          state: started
-        with_items: "{{ webappinstances.instances }}"
+      wait_for:
+        host: "{{ item.public_dns_name }}"
+        port: 22
+        delay: 60
+        timeout: 320
+        state: started
+      with_items: "{{ webappinstances.instances }}"
 
     #Install packages
     - name: Configure EC2 instance
