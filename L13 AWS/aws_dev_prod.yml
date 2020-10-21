@@ -10,7 +10,7 @@
         instance_type: t2.micro
         image: ami-07efac79022b86107
         wait: yes
-        id: dev_build_server1
+        id: dev_build_server2
         region: us-east-2
-        group: EC2SecurityGroup
+        group: ProdAppSecurityGroup
         count: 1
