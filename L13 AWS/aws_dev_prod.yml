@@ -46,6 +46,7 @@
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
+      register: awsBuilder
 
     - name: Ensure a production node is provisioned
       ec2:
@@ -57,8 +58,15 @@
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
+      register: awsProduction
 
     #Get AWS instance Public IPs and Add to Ansible Hosts
-    - name: Add all instance public IPs to host group
-      add_host: hostname={{ item.public_ip }}
-      loop: "{{ ec2.instances }}"
+    - name: Add public IP of builder
+      add_host:
+        hostname={{ item.public_ip }}
+        groups=webapphosts
+      with_items: "{{ awsBuilder.instances }}"
+
+    - name: Add public IP of production
+      add_host: hostname={{ item.public_ip }}  groups=webapphosts
+      with_items: "{{ awsProduction.instances }}"
