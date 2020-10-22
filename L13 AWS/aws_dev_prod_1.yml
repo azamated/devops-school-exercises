@@ -2,7 +2,7 @@
 #Provision instances
 #-----------------
 - hosts: localhost
-  #user: azamat
+  user: azamat
   gather_facts: False
 
   vars:
@@ -27,7 +27,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance8
+        id: awsProdInstance9
         region: "{{ region }}"
         group: EC2SecurityGroup
         count: 1
