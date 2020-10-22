@@ -23,7 +23,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance5
+        id: awsProdInstance6
         region: "{{ region }}"
         group: EC2SecurityGroup
         count: 1
