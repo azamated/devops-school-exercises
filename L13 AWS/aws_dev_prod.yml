@@ -71,7 +71,10 @@
       loop: "{{ awsBuilder.instances }}"
 
     - name: Add public IP of prod
-      add_host: hostname=awsProduction.instances.public_ip groups=awsProduction
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: awsProduction
+      loop: "{{ awsProduction.instances }}"
 
     #Wait until instances start
     - name: Wait for SSH to come up
