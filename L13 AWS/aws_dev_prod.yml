@@ -6,7 +6,7 @@
   gather_facts: False
 
   vars:
-    key_name: my-key
+    key_name: aws-key
     region: us-east-2
     image: ami-07efac79022b86107
 
