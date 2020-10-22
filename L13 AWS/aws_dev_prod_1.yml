@@ -1,7 +1,6 @@
 #-----------------
 #Provision instances
 #-----------------
-- name: create aws instance
 - hosts: localhost
   connection: local
   gather_facts: False
