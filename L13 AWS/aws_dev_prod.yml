@@ -21,7 +21,7 @@
     - name: Instances ID
       debug:
         msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
-        loop: "{{ result.instances }}"
+      loop: "{{ result.instances }}"
 
 
     #upload public key to aws
