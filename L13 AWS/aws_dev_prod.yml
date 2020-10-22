@@ -150,6 +150,9 @@
     - name: Tag docker image
       command: docker tag boxfuse_webapp_v1 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfuse_webapp_v1
 
+    - name: Login to ECR
+      command: aws ecr get-login
+
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfuse_webapp_v1
 
