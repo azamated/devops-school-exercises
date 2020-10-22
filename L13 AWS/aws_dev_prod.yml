@@ -38,7 +38,7 @@
             to_port: 8080
             cidr_ip: 0.0.0.0/0
 
-    #Create Security Groups
+    #Provision AWS instances
     - name: Ensure a builder node is provisioned
       ec2:
         key_name: "{{ key_name }}"
@@ -97,6 +97,8 @@
   become: yes
   gather_facts: False
   tasks:
+    - name: Update repo cache
+      raw: apt-get update
     - name: Ensure docker is installed
       apt:
         name: docker.io
