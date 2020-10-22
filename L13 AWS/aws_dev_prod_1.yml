@@ -39,7 +39,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance11
+        id: awsProdInstance12
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -67,7 +67,7 @@
 #-----------------
 - name: Configure EC2 instance
   hosts: awsProduction
-  remote_user: ubuntu
+  #remote_user: ubuntu
   become: yes
   become_user: root
   gather_facts: False
