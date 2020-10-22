@@ -24,8 +24,8 @@
     #Create Security Groups
     - name: Ensure security group exists for Builer node
       ec2_group:
-        name: BuilderAppSecurityGroup
-        description: Security group for Java App Bilder node with port 22 enabled
+        name: ProdAppSecurityGroup
+        description: Security group for Java App Prod node with ports 22,80,8080 enabled
         region: "{{region}}"
         rules:
           - proto: tcp
@@ -50,7 +50,7 @@
         wait: yes
         id: awsProdInstance18
         region: "{{ region }}"
-        group: BuilderAppSecurityGroup
+        group: ProdAppSecurityGroup
         count: 1
       register: awsProduction
 
