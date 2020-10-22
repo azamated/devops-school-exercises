@@ -11,6 +11,11 @@
     image: ami-07efac79022b86107
 
   tasks:
+
+    - name: my-key
+      ec2_key:
+        name: my-key
+
     - name: Ensure a production node is provisioned
       ec2:
         key_name: "{{ key_name }}"
@@ -49,6 +54,8 @@
   become: yes
   become_user: root
   gather_facts: False
+
+  #Install packages
   tasks:
     - name: Update repo cache
       raw: apt-get update
