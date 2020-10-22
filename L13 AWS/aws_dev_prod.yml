@@ -151,7 +151,7 @@
       command: docker tag boxfuse_webapp_v1 aws_account_id.dkr.ecr.region.amazonaws.com/boxfuse_webapp_v1
 
     - name: Push dockerimage to ECR
-      command: docker push aws_account_id.dkr.ecr.region.amazonaws.com/boxfuse_webapp_v1
+      command: docker push aws_account_id.dkr.ecr.region.amazonaws.com/azamated:boxfuse_webapp_v1
 
 #-----------------
 #Prepare production node and run docker image
