@@ -144,6 +144,7 @@
     - name: Build docker images
       docker_image:
         name: boxfuse_webapp_v1
+        tag: boxfuse_webapp_v1
         build:
           path: /tmp/box/Dockerfile
           source: build
