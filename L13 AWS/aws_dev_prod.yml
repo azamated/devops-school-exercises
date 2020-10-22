@@ -45,7 +45,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsDevInstance
+        id: awsDevInstance1
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -57,7 +57,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance
+        id: awsProdInstance1
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -97,9 +97,9 @@
 
     - name: Upload public key to AWS instances
       ec2_key:
-        name: "{{ key_name }}"
-        key_material: "{{ lookup('file', '~/.ssh/{{ key_name }}.pub') }}"
-        region: "{{ region }}"
+        name: azamat
+        key_material: "{{ item }}"
+        with_file: /root/.ssh/id_rsa.pub
 
 
 #-----------------
