@@ -32,6 +32,14 @@
             from_port: 22
             to_port: 22
             cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 8080
+            to_port: 8080
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
 
     #Provision AWS instance
     - name: Ensure a production node is provisioned
@@ -40,7 +48,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance16
+        id: awsProdInstance18
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -75,9 +83,8 @@
 
   #Install packages
   tasks:
-    - name: Update repo cache
-      raw: apt-get update
-    - name: Ensure docker is installed
+    - name: Ensure nginx is installed
       apt:
-        name: docker.io
+        name: nginx
         state: present
+        update_cache: yes
