@@ -117,7 +117,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y
+      raw: apt-get update && apt-get install python -y && apt-get install awscli -y
 
     - name: Ensure docker is installed
       apt:
@@ -138,6 +138,16 @@
     - name: Build java source code with maven
       command: mvn package -f /tmp/box
 
+    - name: Ensure AWS config are present
+      copy:
+        src: ~/.aws/config
+        dest: ~/.aws/config
+
+    - name: Ensure AWS keys are present
+      copy:
+        src: ~/.aws/credentials
+        dest: ~/.aws/credentials
+
 #-----------------
 #Build docker image, deploy web app and push an AWS registry
 #-----------------
@@ -147,8 +157,8 @@
     - name: Tag docker image
       command: docker tag boxfusewebapp:latest 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
-    #- name: Login to ECR
-    #  command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
+    - name: Login to ECR
+      command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
@@ -165,7 +175,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y
+      raw: apt-get update && apt-get install python -y && apt-get install awscli -y
 
     - name: Ensure docker is installed
       apt:
