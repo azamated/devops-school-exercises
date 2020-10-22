@@ -10,6 +10,7 @@
     region: us-east-2
     image: ami-07efac79022b86107
 
+  tasks:
     #upload public key to aws
     - name: Upload public key to AWS
       ec2_key:
