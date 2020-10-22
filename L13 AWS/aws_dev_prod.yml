@@ -95,11 +95,19 @@
         state: started
       with_items: "{{ awsProduction.instances }}"
 
-    - name: Upload public key to AWS instances
+   # - name: Upload public key to AWS instances
+   #   ec2_key:
+    #    name: aws-key
+
+    - name: Create a new EC2 key
       ec2_key:
         name: aws-key
-        key_material: "{{ item }}"
-        with_file: /root/.ssh/id_rsa.pub
+        region: "{{ region }}"
+      register: ec2_key_result
+
+    - name: Save private key
+      copy: content="{{ ec2_key_result.key.private_key }}" dest="./aws.aws-key.pem" mode=0600
+      when: ec2_key_result.changed
 
 
 #-----------------
