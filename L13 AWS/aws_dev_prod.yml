@@ -117,7 +117,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y && apt-get install awscli -y
+      raw: apt-get update && apt-get install python -y && apt-get install awscli -y && mkdir ~/.aws
 
     - name: Ensure docker is installed
       apt:
@@ -175,7 +175,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y && apt-get install awscli -y
+      raw: apt-get update && apt-get install python -y && apt-get install awscli -y && mkdir ~/.aws
 
     - name: Ensure docker is installed
       apt:
