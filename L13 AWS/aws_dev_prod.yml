@@ -81,7 +81,7 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 60
+        delay: 2
         timeout: 320
         state: started
       with_items: "{{ awsBuilder.instances }}"
@@ -90,7 +90,7 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 60
+        delay: 2
         timeout: 320
         state: started
       with_items: "{{ awsProduction.instances }}"
