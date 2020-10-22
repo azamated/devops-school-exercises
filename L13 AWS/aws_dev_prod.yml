@@ -149,9 +149,8 @@
           source: build
         stateL present
 
-    - name: create repo
-      community.aws.ecs_ecr:
-        name: azamated
+    - name: ecr-repo
+      ecs_ecr: name=azamated
 
     - name: Tag and push to ECR
       community.aws.ecs_ecr:
