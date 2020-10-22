@@ -97,7 +97,7 @@
 
     - name: Upload public key to AWS instances
       ec2_key:
-        name: azamat
+        name: aws-key
         key_material: "{{ item }}"
         with_file: /root/.ssh/id_rsa.pub
 
