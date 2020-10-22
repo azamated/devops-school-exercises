@@ -153,12 +153,11 @@
     - name: ecr-repo
       ecs_ecr: name=azamated
 
-    - name: Tag and push to ECR
-      community.aws.ecs_ecr:
-        name: boxfuse_webapp_v1
-        repository: azamated/boxfuse_webapp_v1
-        push: yes
-        source: local
+    - name: Tag docker image
+      command: docker tag boxfuse_webapp_v1 aws_account_id.dkr.ecr.region.amazonaws.com/boxfuse_webapp_v1
+
+    - name: Push dockerimage to ECR
+      command: docker push aws_account_id.dkr.ecr.region.amazonaws.com/boxfuse_webapp_v1
 
 #-----------------
 #Prepare production node and run docker image
@@ -179,10 +178,8 @@
         name: docker.io
         state: present
 
-    - name: Pull an image
-      community.aws.ecs_ecr:
-        name: azamated/boxfuse_webapp_v1
-        source: pull
+    - name: Pull dockerimage from ECR
+      command: docker pull aws_account_id.dkr.ecr.us-east-2.amazonaws.com/azamated:boxfuse_webapp_v1
 
     - name: Run docker with app
       command: docker build -d -p 8080:8080 boxfuse_webapp_v1
