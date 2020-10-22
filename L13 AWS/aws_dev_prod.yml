@@ -18,9 +18,9 @@
         region: "{{ region }}"
       register: result
 
-     - name: Instances ID
-       debug:
-         msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
+    - name: Instances ID
+      debug:
+        msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
         loop: "{{ result.instances }}"
 
 
