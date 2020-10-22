@@ -100,7 +100,7 @@
 #-----------------
 - name: Configure EC2 instance
   hosts: awsBuilder
-  become: yes
+  user: ubuntu
   gather_facts: False
   tasks:
     - name: Update repo cache
