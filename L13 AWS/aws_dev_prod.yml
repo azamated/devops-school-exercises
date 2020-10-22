@@ -93,7 +93,7 @@
 #Install packages
 #-----------------
 - name: Configure EC2 instance
-  hosts: awsBuilder
+  hosts: awsProduction
   become: yes
   gather_facts: False
   tasks:
