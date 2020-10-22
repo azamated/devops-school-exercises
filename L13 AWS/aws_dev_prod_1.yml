@@ -2,7 +2,7 @@
 #Provision instances
 #-----------------
 - hosts: localhost
-  user: azamat
+  user: root
   gather_facts: False
 
   vars:
@@ -21,6 +21,18 @@
       copy: content="{{ ec2_key_result.key.private_key }}" dest="/root/.ssh/id_rsa" mode=0600
       when: ec2_key_result.changed
 
+    #Create Security Groups
+    - name: Ensure security group exists for Builer node
+      ec2_group:
+        name: BuilderAppSecurityGroup
+        description: Security group for Java App Bilder node with port 22 enabled
+        region: "{{region}}"
+        rules:
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 0.0.0.0/0
+
     - name: Ensure a production node is provisioned
       ec2:
         key_name: aws-key
@@ -29,7 +41,7 @@
         wait: yes
         id: awsProdInstance9
         region: "{{ region }}"
-        group: EC2SecurityGroup
+        group: BuilderAppSecurityGroup
         count: 1
       register: awsProduction
 
