@@ -6,11 +6,18 @@
   gather_facts: False
 
   vars:
-    key_name: aws-key
+    #key_name: aws_key
     region: us-east-2
     image: ami-07efac79022b86107
 
   tasks:
+    #upload public key to aws
+    - name: Upload public key to AWS
+        ec2_key:
+          name: "{{ key_name }}"
+          key_material: "{{ lookup('file', '/root/.ssh/{{ key_name }}.pub') }}"
+          region: "{{ region }}"
+
     #Create Security Groups
     - name: Ensure security group exists for Builer node
       ec2_group:
@@ -45,7 +52,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsDevInstance1
+        id: awsDevInstance2
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -57,7 +64,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance1
+        id: awsProdInstance2
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -81,7 +88,7 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 2
+        delay: 60
         timeout: 320
         state: started
       with_items: "{{ awsBuilder.instances }}"
@@ -90,24 +97,10 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 2
+        delay: 60
         timeout: 320
         state: started
       with_items: "{{ awsProduction.instances }}"
-
-   # - name: Upload public key to AWS instances
-   #   ec2_key:
-    #    name: aws-key
-
-    - name: Create a new EC2 key
-      ec2_key:
-        name: aws-key
-        region: "{{ region }}"
-      register: ec2_key_result
-
-    - name: Save private key
-      copy: content="{{ ec2_key_result.key.private_key }}" dest="./aws.aws-key.pem" mode=0600
-      when: ec2_key_result.changed
 
 
 #-----------------
