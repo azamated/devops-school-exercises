@@ -14,11 +14,11 @@
     - name: create key pair
       ec2_key:
         name: aws-key
-        region: us-east-1
+        region: us-east-2
       register: ec2_key_result
 
     - name: Save private key
-      copy: content="{{ ec2_key_result.key.private_key }}" dest=".ssh/id_rsa" mode=0600
+      copy: content="{{ ec2_key_result.key.private_key }}" dest="/root/.ssh/id_rsa" mode=0600
       when: ec2_key_result.changed
 
     - name: Ensure a production node is provisioned
