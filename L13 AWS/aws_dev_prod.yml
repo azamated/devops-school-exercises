@@ -10,28 +10,12 @@
     region: us-east-2
     image: ami-07efac79022b86107
 
-  tasks:
-    - name: Get instances facts
-      ec2_instance_facts:
-        aws_access_key: "{{ec2_access_key}}"
-        aws_secret_key: "{{ec2_secret_key}}"
-        region: "{{ region }}"
-      register: result
-
-    - name: Instances ID
-      debug:
-        msg: "ID: {{ item.instance_id }} - State: {{ item.state.name }} - Public DNS: {{ item.public_dns_name }}"
-      loop: "{{ result.instances }}"
-
-
     #upload public key to aws
     - name: Upload public key to AWS
       ec2_key:
         name: "{{ key_name }}"
         key_material: "{{ lookup('file', '/root/.ssh/{{ key_name }}.pub') }}"
         region: "{{ region }}"
-        aws_access_key: "{{ec2_access_key}}"
-        aws_secret_key: "{{ec2_secret_key}}"
 
     #Create Security Groups
     - name: Ensure security group exists for Builer node
@@ -39,8 +23,6 @@
         name: BuilderAppSecurityGroup
         description: Security group for Java App Bilder node with port 22 enabled
         region: "{{region}}"
-        aws_access_key: "{{ec2_access_key}}"
-        aws_secret_key: "{{ec2_secret_key}}"
         rules:
           - proto: tcp
             from_port: 22
@@ -52,8 +34,6 @@
         name: ProdAppSecurityGroup
         description: Security group for Production node with ports 22 and 8080 enabled
         region: "{{ region }}"
-        aws_access_key: "{{ec2_access_key}}"
-        aws_secret_key: "{{ec2_secret_key}}"
         rules:
           - proto: tcp
             from_port: 22
@@ -73,8 +53,6 @@
         wait: yes
         id: awsDevInstance3
         region: "{{ region }}"
-        aws_access_key: "{{ec2_access_key}}"
-        aws_secret_key: "{{ec2_secret_key}}"
         group: BuilderAppSecurityGroup
         count: 1
       register: awsBuilder
@@ -87,8 +65,6 @@
         wait: yes
         id: awsProdInstance3
         region: "{{ region }}"
-        aws_access_key: "{{ec2_access_key}}"
-        aws_secret_key: "{{ec2_secret_key}}"
         group: ProdAppSecurityGroup
         count: 1
       register: awsProduction
@@ -125,12 +101,11 @@
         state: started
       with_items: "{{ awsProduction.instances }}"
 
-
 #-----------------
 #Install packages
 #-----------------
 - name: Configure EC2 instance
-  hosts: awsBuilder
+  hosts: awsProduction
   remote_user: ubuntu
   become: yes
   become_user: root
