@@ -6,19 +6,22 @@
   gather_facts: False
 
   vars:
-    key_name: aws_key
     region: us-east-2
     image: ami-07efac79022b86107
 
   tasks:
-    #upload public key to aws
-    - name: Upload public key to AWS
+   #Create SSH key pair and save it on local machine
+    - name: create key pair
       ec2_key:
-        name: "{{ key_name }}"
-        key_material: "{{ lookup('file', '/root/.ssh/{{ key_name }}.pub') }}"
-        region: "{{ region }}"
+        name: aws-key
+        region: us-east-2
+      register: ec2_key_result
 
-    #Create Security Groups
+    - name: Save private key
+      copy: content="{{ ec2_key_result.key.private_key }}" dest="~/.ssh/id_rsa" mode=0600
+      when: ec2_key_result.changed
+
+    #Create Security Groups for Prod and Dev
     - name: Ensure security group exists for Builer node
       ec2_group:
         name: BuilderAppSecurityGroup
@@ -48,11 +51,11 @@
     #Provision AWS instances
     - name: Ensure a builder node is provisioned
       ec2:
-        key_name: "{{ key_name }}"
+        key_name: aws-key
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsDevInstance3
+        id: buildAWS
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -60,11 +63,11 @@
 
     - name: Ensure a production node is provisioned
       ec2:
-        key_name: "{{ key_name }}"
+        key_name: aws-key
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance3
+        id: prodAWS
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -103,7 +106,62 @@
       with_items: "{{ awsProduction.instances }}"
 
 #-----------------
-#Install packages
+#Prepare builder node and build web app
+#-----------------
+- name: Configure EC2 instance
+  hosts: awsBuilder
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  gather_facts: False
+
+  tasks:
+    - name: Update repo cache and install dependencies
+      raw: apt-get update && apt-get install python -y
+
+    - name: Ensure docker is installed
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure maven is installed
+      apt:
+        name: maven
+        state: present
+
+    - name: Ensure jave source code is present
+      git:
+        repo: https://github.com/azamated/devops-school-exercises.git
+        version: master
+        dest: /tmp/box
+
+    - name: Build java source code with maven
+      command: mvn package -f /tmp/box
+
+#-----------------
+#Build docker image, deploy web app and push an AWS registry
+#-----------------
+    - name: Build docker images
+      docker_image:
+        name: boxfuse_webapp_v1
+        build:
+          path: /tmp/box/Dockerfile
+          source: build
+        stateL present
+
+    - name: create repo
+      community.aws.ecs_ecr:
+        name: azamated
+
+    - name: Tag and push to ECR
+      community.aws.ecs_ecr:
+        name: boxfuse_webapp_v1
+        repository: azamated/boxfuse_webapp_v1
+        push: yes
+        source: local
+
+#-----------------
+#Prepare production node and run docker image
 #-----------------
 - name: Configure EC2 instance
   hosts: awsProduction
@@ -111,10 +169,20 @@
   become: yes
   become_user: root
   gather_facts: False
+
   tasks:
-    - name: Update repo cache
-      raw: apt-get update
+    - name: Update repo cache and install dependencies
+      raw: apt-get update && apt-get install python -y
+
     - name: Ensure docker is installed
       apt:
         name: docker.io
         state: present
+
+    - name: Pull an image
+      community.aws.ecs_ecr:
+        name: azamated/boxfuse_webapp_v1
+        source: pull
+
+    - name: Run docker with app
+      command: docker build -d -p 8080:8080 boxfuse_webapp_v1
