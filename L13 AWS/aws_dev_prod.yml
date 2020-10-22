@@ -45,7 +45,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsDev
+        id: awsDevInstance
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -57,7 +57,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProd
+        id: awsProdInstance
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -81,7 +81,7 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 2
+        delay: 60
         timeout: 320
         state: started
       with_items: "{{ awsBuilder.instances }}"
@@ -90,10 +90,17 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 2
+        delay: 60
         timeout: 320
         state: started
       with_items: "{{ awsProduction.instances }}"
+
+    - name: Upload public key to AWS instances
+      ec2_key:
+        name: "{{ key_name }}"
+        key_material: "{{ lookup('file', '~/.ssh/{{ key_name }}.pub') }}"
+        region: "{{ region }}"
+
 
 #-----------------
 #Install packages
