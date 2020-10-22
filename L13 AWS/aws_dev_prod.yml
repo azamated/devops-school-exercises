@@ -142,19 +142,16 @@
 #Build docker image, deploy web app and push an AWS registry
 #-----------------
     - name: Build docker image
-      command: docker build -f /tmp/box/Dockerfile -t boxfuse_webapp_v1 /tmp/box
-
-    #- name: ecr-repo
-    #  ecs_ecr: name=azamated
+      command: docker build -f /tmp/box/Dockerfile -t boxfusewebapp /tmp/box
 
     - name: Tag docker image
-      command: docker tag boxfuse_webapp_v1 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfuse_webapp_v1
+      command: docker tag boxfusewebapp:latest 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
     - name: Login to ECR
-      command: docker login -u AWS -p eyJwYXlsb2FkIjoiSVVpMWxOV05raWpTWnE5VTg0UDhUQmFtK3draTNEcjk2b2pjTkFodFN5Yk9uS1dGb0VRcVh0S05JQXM0ZWVrYzNvMTAxWDU1ZDFsdmU3Y241NW9PZ3lFZUxNMFE0ZkVBN1lMcGg0S243aXJwYlY5d3U3TVh6R29CaFBxY2JlZjdGNjN1aW84bm5XcE0welpjaTR1bFZOaFlHaWRzTTBsZGVKMFZDeXlwdTNFOVFuL3UxcDcyU0t3N2cxM0FjQ1hYSThJWXM0UmQvbE8wYmI0NCtKYW1SN01oU0JLV0xDNDQ0WU9FdWlvS1pkbkRYZkR3c25kS0FDRjIyMmxyYjlPT2FSWlExc3RDZUE4djJxL042OVRKclJPTkpqVDV2TkZMWjgxSTdOSzVZVjZmV3hSU2hHUFNqMTdWYlhTeE1xT25KWUc1aHRwNTRab1NSVDNvdEp3VFI1ZGlyTmQ2eDBNU24vM0hTTUd4TmJzZS93NHdiK1MrMGM5NU44eGJoTWlCK2w3UkhMRk14SmpWb0RMOUFnVk9FNDVYY3ArVXV2OUpkZFNSNjJVUE4vNjc2VTV0RzBMbStvb1plQ3VNL2FYN2tPdlhHbVhOTzZjd3NCb2V4UTNTY1F4cjVjNHZqNll3RUhUaHVuT1ZGU1JFNHdmVitRZDYrTjVrVGJZdmFnaUdWOHhYdzk2QkJ4NHhpRW9VY20ydy9MMGxHeDRZWlRqdEliczBWRVVIN0RFZUFVamxIcjQ0SHp1SmF1aFVjRW9pWUZIYVVlTGJOYVZDeG9FbStYandzeUk0dEhuL1U0NDVjNEJFUktCTm1TUGpjSTVlQXZCeko3OEt0MXZlaWl4WHE3bEtqVjJoZTM0SjhWMUxVbXdpU2VEQ1M4ck01WmJsbDJSK2ROVmk5M3RINjdpK3M4VmpKa083K2QzYnNtVTlXVnJzelo0dGVUYjdZK1pGbnE1ZVBjVXAvcmxUbldzTi9pL2FUUWsyem5qbHBva1ZxTGU1MTFrZExNWG5ZRkVLU3Y1V0ZVcnllVDhuVFpKWjVLb2xTYng2T2tJWEhtT3hhUzJ0eHk3a3V6MVdDTVo5K2hVcUY0YWl3YXpmWkFSS2E3L2pwblpwaXpmakNiZ3dNM1R5Mml5c1NwMnNrWlpDOGRsSXMvbFNDODFqS20rODBVOENweGZXWVN5ZWxJU3Z2LzNkTkhJL0hBTVVKZE5lc3ZXckZYTXpGcFkxVkdsL0FYRXVoR2srckZFU1ZWdzRXT0tyWVJCbkRmZitZbTY3V0VRNytMa0JNMTJjYngvV0JZck1hVmc2bHpoSnhadGpTTFJvd1pmQlFBTDI2d0NvYjl6WG4wYlMrQmhGcXYvdnZya1BZZ2dLZlRCRTVER2FYeDBYTWNFTjE1eWJoeG1wTlRPNVp3SlI1REplWVR2UTBKdEhIZzFwODNLa0FNbWZjd0FLWU5CVnFlQ00zMk9TTVlkMGxaSW1yeFZJVGpNUHNhNVlGYytSYjZ4R2l5WmxJbEU4SlpRcjVucG9BUTNMV0FrR1dWT3hTbndYOXN4aHl1Z2JPMXFsIiwiZGF0YWtleSI6IkFRRUJBSGpCNy9pZ3dNZzROUHdhdXJ4U0lZeDRIZm54dUdjLzQ4YkR3dndEcE5ZV1pnQUFBSDR3ZkFZSktvWklodmNOQVFjR29HOHdiUUlCQURCb0Jna3Foa2lHOXcwQkJ3RXdIZ1lKWUlaSUFXVURCQUV1TUJFRURGOUlPSjVYVWNPdXhNYTZZQUlCRUlBN2FqSUFVSndZVmR1NGJ1d1pJM3JySWkrcnJTNXliU3RiaFVGNXhuLzBGbi8xM3dZQlJ1WFltelVjZit6U0E0NmhhT0Q0TThUVzl4dFpKLzA9IiwidmVyc2lvbiI6IjIiLCJ0eXBlIjoiREFUQV9LRVkiLCJleHBpcmF0aW9uIjoxNjAzNDUzMDUzfQ==
+      command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
     - name: Push dockerimage to ECR
-      command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfuse_webapp_v1
+      command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
 #-----------------
 #Prepare production node and run docker image
