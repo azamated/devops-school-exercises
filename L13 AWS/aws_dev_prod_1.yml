@@ -39,7 +39,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance9
+        id: awsProdInstance10
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
