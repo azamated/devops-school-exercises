@@ -147,7 +147,7 @@
         build:
           path: /tmp/box/Dockerfile
           source: build
-        stateL present
+        state: present
 
     - name: ecr-repo
       ecs_ecr: name=azamated
