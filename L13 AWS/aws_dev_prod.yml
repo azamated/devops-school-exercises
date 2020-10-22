@@ -65,9 +65,12 @@
 
     #Get AWS instance Public IPs and Add to Ansible Hosts
     - name: Add public IP of builder
-      add_host: hostname=awsBuilder.instances.public_ip groups=awsBuilder
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: awsBuilder
+      loop: "{{ awsBuilder.instances }}"
 
-    - name: Add public IP of builder
+    - name: Add public IP of prod
       add_host: hostname=awsProduction.instances.public_ip groups=awsProduction
 
     #Wait until instances start
@@ -93,7 +96,7 @@
 #Install packages
 #-----------------
 - name: Configure EC2 instance
-  hosts: awsProduction
+  hosts: awsBuilder
   become: yes
   gather_facts: False
   tasks:
