@@ -13,10 +13,10 @@
   tasks:
     #upload public key to aws
     - name: Upload public key to AWS
-        ec2_key:
-          name: "{{ key_name }}"
-          key_material: "{{ lookup('file', '/root/.ssh/{{ key_name }}.pub') }}"
-          region: "{{ region }}"
+      ec2_key:
+        name: "{{ key_name }}"
+        key_material: "{{ lookup('file', '/root/.ssh/{{ key_name }}.pub') }}"
+        region: "{{ region }}"
 
     #Create Security Groups
     - name: Ensure security group exists for Builer node
