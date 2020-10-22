@@ -2,7 +2,7 @@
 #Provision instances
 #-----------------
 - hosts: localhost
-  user: root
+  connection: local
   gather_facts: False
 
   vars:
@@ -18,7 +18,7 @@
       register: ec2_key_result
 
     - name: Save private key
-      copy: content="{{ ec2_key_result.key.private_key }}" dest="/root/.ssh/id_rsa" mode=0600
+      copy: content="{{ ec2_key_result.key.private_key }}" dest="~/.ssh/id_rsa" mode=0600
       when: ec2_key_result.changed
 
     #Create Security Groups
@@ -33,13 +33,14 @@
             to_port: 22
             cidr_ip: 0.0.0.0/0
 
+    #Provision AWS instance
     - name: Ensure a production node is provisioned
       ec2:
         key_name: aws-key
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProdInstance12
+        id: awsProdInstance13
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -67,7 +68,7 @@
 #-----------------
 - name: Configure EC2 instance
   hosts: awsProduction
-  #remote_user: ubuntu
+  remote_user: ubuntu
   become: yes
   become_user: root
   gather_facts: False
