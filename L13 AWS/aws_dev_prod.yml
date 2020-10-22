@@ -131,7 +131,7 @@
 
     - name: Ensure jave source code is present
       git:
-        repo: https://github.com/azamated/devops-school-exercises.git
+        repo: https://github.com/azamated/boxfuse-sample-java-war-hello.git
         version: master
         dest: /tmp/box
 
