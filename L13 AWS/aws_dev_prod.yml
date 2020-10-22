@@ -144,8 +144,8 @@
     - name: Build docker image
       command: docker build -f /tmp/box/Dockerfile -t boxfuse_webapp_v1 /tmp/box
 
-    - name: ecr-repo
-      ecs_ecr: name=azamated
+    #- name: ecr-repo
+    #  ecs_ecr: name=azamated
 
     - name: Tag docker image
       command: docker tag boxfuse_webapp_v1 aws_account_id.dkr.ecr.region.amazonaws.com/boxfuse_webapp_v1
