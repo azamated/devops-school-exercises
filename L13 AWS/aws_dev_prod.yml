@@ -6,7 +6,7 @@
   gather_facts: False
 
   vars:
-    key_name: aws-key
+    key_name: my-key
     region: us-east-2
     image: ami-07efac79022b86107
 
@@ -100,7 +100,9 @@
 #-----------------
 - name: Configure EC2 instance
   hosts: awsBuilder
-  user: ubuntu
+  remote_user: ubuntu
+  become: yes
+  become_user: root
   gather_facts: False
   tasks:
     - name: Update repo cache
