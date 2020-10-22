@@ -84,7 +84,7 @@
   #Install packages
   tasks:
     - name: Update repo cache
-      raw: apt-get update && apt-get install python
+      raw: apt-get update && apt-get install python -y
     - name: Ensure nginx is installed
       apt:
         name: nginx
