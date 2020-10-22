@@ -45,7 +45,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsBuilder
+        id: awsBuilderNode
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -57,7 +57,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProduction
+        id: awsProductionNode
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
