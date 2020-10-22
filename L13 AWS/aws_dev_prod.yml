@@ -6,7 +6,7 @@
   gather_facts: False
 
   vars:
-    key_name: my-key
+    key_name: aws-key
     region: us-east-2
     image: ami-07efac79022b86107
 
@@ -45,7 +45,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsBuilderNode
+        id: awsDev
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -57,7 +57,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: awsProductionNode
+        id: awsProd
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
