@@ -141,14 +141,8 @@
 #-----------------
 #Build docker image, deploy web app and push an AWS registry
 #-----------------
-    - name: Build docker images
-      docker_image:
-        name: boxfuse_webapp_v1
-        tag: boxfuse_webapp_v1
-        build:
-          path: /tmp/box/Dockerfile
-          source: build
-        state: present
+    - name: Build docker image
+      command: docker build -f /tmp/box/Dockerfile -t boxfuse_webapp_v1 .
 
     - name: ecr-repo
       ecs_ecr: name=azamated
