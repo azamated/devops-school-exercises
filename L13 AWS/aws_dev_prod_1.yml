@@ -3,6 +3,7 @@
 #-----------------
 - hosts: localhost
   connection: local
+  user: azamat
   gather_facts: False
 
   vars:
