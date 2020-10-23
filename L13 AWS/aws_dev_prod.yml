@@ -130,7 +130,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y
+      raw: apt-get update && apt-get install python -y && apt-get update
 
     - name: Install Python pip and boto
       shell: apt install python-pip -y && pip install boto && pip install boto3
@@ -148,7 +148,6 @@
         mode: 0600
 
     #Build java source code, deploy web app & push it to AWS registry
-
     - name: Ensure docker is installed
       apt:
         name: docker.io
@@ -174,7 +173,6 @@
       command: mvn package -f /tmp/box
 
     #Build docker image, deploy web app & push it to AWS registry
-
     - name: Build docker image
       command: docker build -f /tmp/box/Dockerfile -t boxfusewebapp /tmp/box
 
