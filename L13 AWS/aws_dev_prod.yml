@@ -55,7 +55,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: AWS_build2
+        id: AWS_build_inst
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -67,7 +67,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: AWS_prod2
+        id: AWS_prod_inst
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -91,7 +91,7 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 2
+        delay: 5
         timeout: 320
         state: started
       with_items: "{{ awsBuilder.instances }}"
@@ -100,7 +100,7 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 2
+        delay: 60
         timeout: 320
         state: started
       with_items: "{{ awsProduction.instances }}"
@@ -130,7 +130,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: add-apt-repository universe && apt-get update && apt-get install -y python3 && apt-get install python3-pip -y && pip3 install boto3 && pip3 install boto
+      raw: apt-get update && apt-get install python -y
 
     - name: Ensure aws directory is created
       file:
@@ -176,10 +176,10 @@
       command: docker tag boxfusewebapp:latest 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
     - name: Login to ECR
-      command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
+      shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
-    - name: ecr-repo
-      ecs_ecr: name=boxfusewebapp
+    #- name: ecr-repo
+    #  ecs_ecr: name=boxfusewebapp
 
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
