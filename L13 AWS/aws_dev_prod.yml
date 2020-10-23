@@ -190,7 +190,6 @@
     - name: ecr-repo
       ecs_ecr: name=boxfusewebapp
 
-
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
