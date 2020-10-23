@@ -129,12 +129,12 @@
   gather_facts: False
 
   tasks:
-
-    - name: Update repositories cache and install "python-pip" package
-      apt:
-        name: python
-        state: present
-        update_cache: yes
+    - name: Ensure necessary packages are installed
+      apt: name={{ item }} state=installed
+      with_items:
+        - python
+        - python-pip
+      update_cache: yes
 
     - name: Install boto
       shell: pip install boto && pip install boto3
