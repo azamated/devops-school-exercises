@@ -105,9 +105,6 @@
         state: started
       with_items: "{{ awsProduction.instances }}"
 
-    - name: run ssh-keyscan to add keys to known_hosts
-        local_action: shell ssh-keyscan {{ ansible_ssh_host }} >> ~/.ssh/known_hosts
-
     - name: Add EC2 awsBuilder as known hosts
       known_hosts:
         name: "{{ item.public_ip }}"
