@@ -118,7 +118,7 @@
       with_items: "{{ awsProduction.instances }}"
 
 #-----------------
-#Prepare builder node and build web app
+#Configure the builder node and build web app
 #-----------------
 - name: Configure EC2 instance
   hosts: awsBuilder
@@ -136,6 +136,20 @@
         path: ~/.aws
         state: directory
         mode: 0755
+
+    - name: Ensure AWS config presents
+      copy:
+        src: ~/.aws/config
+        dest: ~/.aws/config
+        mode: 0600
+
+    - name: Ensure AWS keys present
+      copy:
+        src: ~/.aws/credentials
+        dest: ~/.aws/credentials
+        mode: 0600
+
+    #Build java source code, deploy web app & push it to AWS registry
 
     - name: Ensure docker is installed
       apt:
@@ -161,21 +175,8 @@
     - name: Build java source code with maven
       command: mvn package -f /tmp/box
 
-    - name: Ensure AWS config presents
-      copy:
-        src: ~/.aws/config
-        dest: ~/.aws/config
-        mode: 0600
+    #Build docker image, deploy web app & push it to AWS registry
 
-    - name: Ensure AWS keys present
-      copy:
-        src: ~/.aws/credentials
-        dest: ~/.aws/credentials
-        mode: 0600
-
-#-----------------
-#Build docker image, deploy web app & push it to AWS registry
-#-----------------
     - name: Build docker image
       command: docker build -f /tmp/box/Dockerfile -t boxfusewebapp /tmp/box
 
@@ -185,11 +186,15 @@
     - name: Login to ECR
       shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
+    - name: ecr-repo
+      community.aws.ecs_ecr:
+        name: boxfusewebapp
+
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
 #-----------------
-#Prepare production node and run docker image
+#Configure the production node and run docker image
 #-----------------
 - name: Configure EC2 instance
   hosts: awsProduction
