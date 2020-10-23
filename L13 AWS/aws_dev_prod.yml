@@ -132,8 +132,14 @@
     - name: Update repo cache and install dependencies
       raw: apt-get update && apt-get install python -y && apt-get update
 
-    - name: Install Python pip and boto
-      shell: apt install python-pip -y && pip install boto && pip install boto3
+    - name: Install boto
+      shell: pip install boto && pip install boto3
+
+    - name: Ensure aws directory is created
+      file:
+        path: ~/.aws
+        state: directory
+        mode: 0755
 
     - name: Ensure AWS config presents
       copy:
@@ -203,8 +209,8 @@
     - name: Update repo cache and install dependencies
       raw: apt-get update && apt-get install python -y
 
-    - name: Install Python pip and boto
-      shell: apt install python-pip -y && pip install boto && pip install boto3
+    - name: Install boto
+      shell: pip install boto && pip install boto3
 
     - name: Ensure aws directory is created
       file:
