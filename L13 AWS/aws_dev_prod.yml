@@ -174,7 +174,7 @@
         mode: 0600
 
 #-----------------
-#Build docker image, deploy web app and push an AWS registry
+#Build docker image, deploy web app & push it to AWS registry
 #-----------------
     - name: Build docker image
       command: docker build -f /tmp/box/Dockerfile -t boxfusewebapp /tmp/box
