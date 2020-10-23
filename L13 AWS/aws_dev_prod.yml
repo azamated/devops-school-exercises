@@ -123,6 +123,7 @@
       file:
         path: ~/.aws
         state: directory
+        mode: 0755
 
     - name: Ensure docker is installed
       apt:
@@ -152,11 +153,13 @@
       copy:
         src: ~/.aws/config
         dest: ~/.aws/config
+        mode: 0600
 
     - name: Ensure AWS keys are present
       copy:
         src: ~/.aws/credentials
         dest: ~/.aws/credentials
+        mode: 0600
 
 #-----------------
 #Build docker image, deploy web app and push an AWS registry
@@ -191,16 +194,19 @@
       file:
         path: ~/.aws
         state: directory
+        mode: 0755
 
     - name: Ensure AWS config are present
       copy:
         src: ~/.aws/config
         dest: ~/.aws/config
+        mode: 0600
 
     - name: Ensure AWS keys are present
       copy:
         src: ~/.aws/credentials
         dest: ~/.aws/credentials
+        mode: 0600
 
     - name: Ensure docker is installed
       apt:
