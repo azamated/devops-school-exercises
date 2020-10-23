@@ -130,7 +130,12 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      command: apt-get update && apt-get install python -y && apt install python-pip
+      apt: name=python state=present
+      update_cache: yes
+
+    - name: Update repo cache and install dependencies
+      apt: name=python-pip state=present
+      update_cache: yes
 
     - name: Install boto
       shell: pip install boto && pip install boto3
