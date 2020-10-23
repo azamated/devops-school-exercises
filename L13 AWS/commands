@@ -9,4 +9,15 @@ apt install -y python-pip
 pip install boto
 pip install boto3
 
+#Install and configure aws with AWS credentials
+apt install aws
+aws configure
+
+#Inject Dockerfile into Boxfuse repo
+
+
+
+
+
+
 
