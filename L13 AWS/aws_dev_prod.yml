@@ -187,11 +187,8 @@
     - name: Login to ECR
       shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
-    - name: ecr-repo
-      ecs_ecr: name=boxfusewebapp
-
-    - name: Push dockerimage to ECR
-      command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
+    - name: Create repo in ECR
+      shell: aws ecr create-repository --repository-name boxfusewebapp
 
 #-----------------
 #Configure the production node and run docker image
