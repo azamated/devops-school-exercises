@@ -187,6 +187,16 @@
         path: ~/.aws
         state: directory
 
+    - name: Ensure AWS config are present
+      copy:
+        src: ~/.aws/config
+        dest: ~/.aws/config
+
+    - name: Ensure AWS keys are present
+      copy:
+        src: ~/.aws/credentials
+        dest: ~/.aws/credentials
+
     - name: Ensure docker is installed
       apt:
         name: docker.io
