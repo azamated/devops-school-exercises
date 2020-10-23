@@ -153,7 +153,7 @@
     #Build java source code, deploy web app & push it to AWS registry
 
     - name: Ensure necessary packages are installed
-      apt: name={{ item }} state=installed
+      apt: name={{ item }} state=present
       with_items:
         - docker.io
         - maven
