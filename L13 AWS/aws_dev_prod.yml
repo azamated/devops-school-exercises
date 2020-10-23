@@ -130,11 +130,10 @@
 
   tasks:
     - name: Ensure necessary packages are installed
-      apt: name={{ item }} state=installed
+      apt: name={{ item }} state=present
       with_items:
         - python
         - python-pip
-      update_cache: yes
 
     - name: Install boto
       shell: pip install boto && pip install boto3
