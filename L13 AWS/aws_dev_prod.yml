@@ -130,7 +130,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y && apt install python-pip
+      raw: apt-get update && apt-get install python -y && apt-get install python3 -y && apt install python-pip && apt install python-pip3
 
     - name: Install boto
       shell: pip install boto && pip install boto3
