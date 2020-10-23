@@ -132,7 +132,7 @@
 
     - name: Update repositories cache and install "python-pip" package
       apt:
-        name: python-pip
+        name: python
         state: present
         update_cache: yes
 
@@ -158,20 +158,13 @@
         mode: 0600
 
     #Build java source code, deploy web app & push it to AWS registry
-    - name: Ensure docker is installed
-      apt:
-        name: docker.io
-        state: present
 
-    - name: Ensure maven is installed
-      apt:
-        name: maven
-        state: present
-
-    - name: Ensure awscli is installed
-      apt:
-        name: awscli
-        state: present
+    - name: Ensure necessary packages are installed
+      apt: name={{ item }} state=installed
+      with_items:
+        - docker.io
+        - maven
+        - awscli
 
     - name: Ensure jave source code is present
       git:
