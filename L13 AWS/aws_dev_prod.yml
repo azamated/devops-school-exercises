@@ -130,7 +130,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: add-apt-repository universe && apt-get update && apt-get install -y python3 && apt-get install python3-pip -y && pip3 install boto3 && && pip3 install boto
+      raw: add-apt-repository universe && apt-get update && apt-get install -y python3 && apt-get install python3-pip -y && pip3 install boto3 && pip3 install boto
 
     - name: Ensure aws directory is created
       file:
