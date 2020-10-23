@@ -129,14 +129,8 @@
   gather_facts: False
 
   tasks:
-    - name: Ensure necessary packages are installed
-      apt: name={{ item }} state=installed
-      with_items:
-        - python
-        - python-boto
-
-    - name: Install boto
-      shell: pip install boto && pip install boto3
+    - name: Update repo cache and install dependencies
+      raw: apt-get update && apt-get install python -y
 
     - name: Ensure aws directory is created
       file:
@@ -204,9 +198,6 @@
   tasks:
     - name: Update repo cache and install dependencies
       raw: apt-get update && apt-get install python -y
-
-    - name: Install boto
-      shell: pip install boto && pip install boto3
 
     - name: Ensure aws directory is created
       file:
