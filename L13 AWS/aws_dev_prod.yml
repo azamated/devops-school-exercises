@@ -105,6 +105,7 @@
         state: started
       with_items: "{{ awsProduction.instances }}"
 
+    #Add EC2 instances to known hosts
     - name: Add EC2 awsBuilder as known hosts
       known_hosts:
         name: "{{ item.public_ip }}"
@@ -187,8 +188,8 @@
       shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
     - name: ecr-repo
-      community.aws.ecs_ecr:
-        name: boxfusewebapp
+      ecs_ecr: name=boxfusewebapp
+
 
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
@@ -225,6 +226,7 @@
         dest: ~/.aws/credentials
         mode: 0600
 
+    #Pull the docker image and run on production
     - name: Ensure docker is installed
       apt:
         name: docker.io
