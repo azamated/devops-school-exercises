@@ -158,7 +158,8 @@
       command: docker tag boxfusewebapp:latest 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
     - name: Login to ECR
-      command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
+      command:
+      aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
     - name: Push dockerimage to ECR
       command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
@@ -181,6 +182,9 @@
       apt:
         name: docker.io
         state: present
+
+    - name: Login to ECR
+      command: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
 
     - name: Pull dockerimage from ECR
       command: docker pull 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
