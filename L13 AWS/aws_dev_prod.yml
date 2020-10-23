@@ -180,6 +180,9 @@
 
     #- name: Create repo in ECR
     #  shell: aws ecr create-repository --repository-name boxfusewebapp
+    - name: Boto3
+      command: apt update && apt install python-pip && pip install boto3
+
     - name: ecr-repo
       ecs_ecr: name=boxfusewebapp
 
@@ -218,15 +221,11 @@
         mode: 0600
 
     #Pull the docker image and run on production
-    - name: Ensure docker is installed
-      apt:
-        name: docker.io
-        state: present
-
-    - name: Ensure awscli is installed
-      apt:
-        name: awscli
-        state: present
+    - name: Ensure necessary packages are installed
+      apt: name={{ item }} state=present
+      with_items:
+        - docker.io
+        - awscli
 
     - name: Login to ECR
       shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
