@@ -117,7 +117,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y && apt-get install awscli -y
+      raw: apt-get update && apt-get install python -y
 
     - name: Ensure aws directory is created
       file:
@@ -132,6 +132,11 @@
     - name: Ensure maven is installed
       apt:
         name: maven
+        state: present
+
+    - name: Ensure awscli is installed
+      apt:
+        name: awscli
         state: present
 
     - name: Ensure jave source code is present
@@ -180,7 +185,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y && apt-get install awscli -y
+      raw: apt-get update && apt-get install python -y
 
     - name: Ensure aws directory is created
       file:
@@ -200,6 +205,11 @@
     - name: Ensure docker is installed
       apt:
         name: docker.io
+        state: present
+
+    - name: Ensure awscli is installed
+      apt:
+        name: awscli
         state: present
 
     - name: Login to ECR
