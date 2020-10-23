@@ -2,7 +2,7 @@
 Task: Using Ansible build two instances in AWS. Once instance should build the project and pack a war artifact into a docker image.
 Another instance shall run a docker conteiner with the image built in the first instance.
 
-- Prerequisites:
+-  Prerequisites:
  |__ Ansible 2.9
  |__ Python
  |__ Pyhton-pip
