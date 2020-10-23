@@ -225,4 +225,4 @@
       command: docker pull 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 
     - name: Run docker with app
-      command: docker build -d -p 8080:8080 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
+      command: docker build -d -p 8080:8080 boxfusewebapp
