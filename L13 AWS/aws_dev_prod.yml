@@ -1,5 +1,5 @@
 #-----------------
-#Provision instances
+#Prfepare and Provision instances
 #-----------------
 - hosts: localhost
   connection: local
@@ -55,7 +55,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: buildAWSnode
+        id: buildAWSnode1
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -67,7 +67,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: prodAWSnode
+        id: prodAWSnode1
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -100,9 +100,24 @@
       wait_for:
         host: "{{ item.public_dns_name }}"
         port: 22
-        delay: 60
+        delay: 2
         timeout: 320
         state: started
+      with_items: "{{ awsProduction.instances }}"
+
+    - name: run ssh-keyscan to add keys to known_hosts
+        local_action: shell ssh-keyscan {{ ansible_ssh_host }} >> ~/.ssh/known_hosts
+
+    - name: Add EC2 awsBuilder as known hosts
+      known_hosts:
+        name: "{{ item.public_ip }}"
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item.public_ip) }}"
+      with_items: "{{ awsBuilder.instances }}"
+
+    - name: Add EC2 awsProduction as known hosts
+      known_hosts:
+        name: "{{ item.public_ip }}"
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa ' + item.public_ip) }}"
       with_items: "{{ awsProduction.instances }}"
 
 #-----------------
@@ -149,13 +164,13 @@
     - name: Build java source code with maven
       command: mvn package -f /tmp/box
 
-    - name: Ensure AWS config are present
+    - name: Ensure AWS config presents
       copy:
         src: ~/.aws/config
         dest: ~/.aws/config
         mode: 0600
 
-    - name: Ensure AWS keys are present
+    - name: Ensure AWS keys present
       copy:
         src: ~/.aws/credentials
         dest: ~/.aws/credentials
@@ -196,13 +211,13 @@
         state: directory
         mode: 0755
 
-    - name: Ensure AWS config are present
+    - name: Ensure AWS config presents
       copy:
         src: ~/.aws/config
         dest: ~/.aws/config
         mode: 0600
 
-    - name: Ensure AWS keys are present
+    - name: Ensure AWS keys present
       copy:
         src: ~/.aws/credentials
         dest: ~/.aws/credentials
