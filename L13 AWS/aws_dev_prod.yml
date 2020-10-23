@@ -55,7 +55,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: buildAWSnode1
+        id: AWS_build
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -67,7 +67,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: prodAWSnode1
+        id: AWS_prod
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -177,11 +177,6 @@
 
     - name: Login to ECR
       shell: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 013898691880.dkr.ecr.us-east-2.amazonaws.com
-
-    #- name: Create repo in ECR
-    #  shell: aws ecr create-repository --repository-name boxfusewebapp
-    - name: Boto3
-      command: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py --user && pip install boto3
 
     - name: ecr-repo
       ecs_ecr: name=boxfusewebapp
