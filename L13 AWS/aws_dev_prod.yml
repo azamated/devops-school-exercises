@@ -190,6 +190,8 @@
     - name: Create repo in ECR
       shell: aws ecr create-repository --repository-name boxfusewebapp
 
+    - name: Push dockerimage to ECR
+      command: docker push 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest
 #-----------------
 #Configure the production node and run docker image
 #-----------------
