@@ -19,6 +19,8 @@ Another instance shall run a docker conteiner with the image built in the first 
 6. The first instance provisions maven, builds a war artifact and builds a docker image.
 7. The second instance pulls the docker image from aws ecr and runs the image.
 
+-- ~/.aws directory needs to be synchronised with all aws instances, this is required for authentication with AWS registry
+--  When Ansible ssh to the instances fro the first time, it asks for configuration, need to manually enter "yes"
  
 
  
