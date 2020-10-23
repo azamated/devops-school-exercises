@@ -21,9 +21,5 @@ Another instance shall run a docker conteiner with the image built in the first 
 
 -- ~/.aws directory needs to be synchronised with all aws instances, this is required for authentication with AWS registry
 
---  When Ansible ssh to the instances fro the first time, it asks for configuration, need to manually enter "yes"
- 
-
- 
  
  
