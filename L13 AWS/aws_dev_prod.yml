@@ -55,7 +55,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: AWS_build
+        id: AWS_build1
         region: "{{ region }}"
         group: BuilderAppSecurityGroup
         count: 1
@@ -67,7 +67,7 @@
         instance_type: t2.micro
         image: "{{ image }}"
         wait: yes
-        id: AWS_prod
+        id: AWS_prod1
         region: "{{ region }}"
         group: ProdAppSecurityGroup
         count: 1
@@ -130,7 +130,7 @@
 
   tasks:
     - name: Update repo cache and install dependencies
-      raw: apt-get update && apt-get install python -y && apt-get remove python-pip-whl && apt install python-pip && pip install boto3
+      raw: apt-get update && apt install python-pip -y && pip install boto3
 
     - name: Ensure aws directory is created
       file:
