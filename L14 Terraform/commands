@@ -1,0 +1,7 @@
+ apt install python
+ apt install python-pip
+ apt install python-requests
+ apt install ansible
+ pip install google-auth
+ apt-get install google-cloud-sdk
+ gcloud auth application-default login
