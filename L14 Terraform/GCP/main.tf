@@ -25,6 +25,17 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
+  metadata = {
+    ssh-keys = "root:${file("~/.ssh/id_rsa.pub")}"
+  }
+
+  connection {
+    type = "ssh"
+    user = "root"
+    private_key = "${file("~/.ssh/id_rsa")}"
+    agent = "false"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo apt-get update && sudo apt-get install -y docker.io maven default-jdk google-cloud-sd",
@@ -35,7 +46,7 @@ resource "google_compute_instance" "vm_instance" {
     ]
   }
 
-  }
+    }
 
 # Firewall rules
 resource "google_compute_firewall" "default" {
