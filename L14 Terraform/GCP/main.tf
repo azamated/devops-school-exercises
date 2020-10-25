@@ -25,11 +25,11 @@ resource "google_compute_instance" "vm_instance1" {
     }
   }
   provisioner "local-exec" {
-    command = "apt-get update; apt-get install -y docker.io && apt-get install -y maven && apt-get install -y git"
+    command = "apt-get update && apt-get install -y docker.io && apt-get install -y maven && apt-get install -y git"
   }
 
   provisioner "local-exec" {
-    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git; mvn package -f /tmp/boxfuse-sample-java-war-hello"
+    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git && mvn package -f /tmp/boxfuse-sample-java-war-hello"
   }
 
   provisioner "local-exec" {
