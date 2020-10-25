@@ -7,7 +7,7 @@ provider "google" {
 # Builder node
 resource "google_compute_instance" "vm_instance1" {
   name         = "ubuntu-builder"
-  machine_type = "e2-standard"
+  machine_type = "e2-standard-4"
 
 
   boot_disk {
@@ -41,7 +41,7 @@ resource "google_compute_instance" "vm_instance1" {
 # Production node
 resource "google_compute_instance" "vm_instance2" {
   name         = "ubuntu-production"
-  machine_type = "e2-standard"
+  machine_type = "e2-standard-4"
 
   boot_disk {
     initialize_params {
