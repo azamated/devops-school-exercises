@@ -29,7 +29,7 @@ resource "google_compute_instance" "vm_instance1" {
 resource "google_storage_bucket_object" "war-file" {
   name   = "hello-1.0.war"
   source = "/tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war"
-  bucket = "devops"
+  bucket = "aamirakulov"
 }
 
 resource "google_compute_instance" "vm_instance2" {
@@ -42,8 +42,6 @@ resource "google_compute_instance" "vm_instance2" {
     }
   }
 
-
-
   network_interface {
     # A default network is created for all GCP projects
     network = "default"
@@ -55,7 +53,6 @@ resource "google_compute_instance" "vm_instance2" {
 
   metadata_startup_script = "apt-get update; apt-get install -y docker.io && apt-get install tomcat8 -y && cd /usr/local/tomcat/webapps/ && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war"
 }
-
 
 resource "google_compute_firewall" "default" {
   name    = "instance-firewall"
