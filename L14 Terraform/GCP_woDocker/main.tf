@@ -32,7 +32,7 @@ resource "google_compute_instance" "vm_instance1" {
 
   provisioner "file" {
     source = "credentials.json"
-    destination = "tmp/credentials.json"
+    destination = "/tmp/credentials.json"
 
     connection {
       type = "ssh"
@@ -50,7 +50,7 @@ resource "google_compute_instance" "vm_instance1" {
       "cd /tmp",
       "git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git",
       "mvn package -f /tmp/boxfuse-sample-java-war-hello",
-      "gcloud auth activate-service-account --key-file=tmp/credentials.json",
+      "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       #"gsutil cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war gs://aamirakulov/",
       "docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
     ]
@@ -93,7 +93,7 @@ resource "google_compute_instance" "vm_instance2" {
 
   provisioner "file" {
     source = "credentials.json"
-    destination = "tmp/credentials.json"
+    destination = "/tmp/credentials.json"
 
     connection {
       type = "ssh"
@@ -106,7 +106,7 @@ resource "google_compute_instance" "vm_instance2" {
   provisioner "remote-exec" {
     inline = [
       "apt-get update && apt-get install -y docker.io  default-jdk tomcat8",
-      "gcloud auth activate-service-account --key-file=tmp/credentials.json",
+      "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       "cd /tmp && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war && sudo cp java-webapp-prod.war /var/lib/tomcat8/webapps/"
     ]
   }
