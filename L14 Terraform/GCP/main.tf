@@ -31,8 +31,11 @@ resource "google_compute_instance" "vm_instance3" {
   }
 
   provisioner "local-exec" {
-    command = "cd /tmp && sudo git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
+    command = "cd /tmp"
+  }
 
+  provisioner "local-exec" {
+    command = "sudo git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
   }
 
   provisioner "local-exec" {
