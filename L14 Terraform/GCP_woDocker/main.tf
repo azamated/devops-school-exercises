@@ -17,7 +17,7 @@ resource "google_compute_instance" "vm_instance1" {
   }
 
   network_interface {
-    # A default network is created for all GCP projects
+    # A default network is created for all GCP_woDocker projects
     network = "default"
 
   access_config {
@@ -63,7 +63,7 @@ resource "google_compute_instance" "vm_instance2" {
   }
 
   network_interface {
-    # A default network is created for all GCP projects
+    # A default network is created for all GCP_woDocker projects
     network = "default"
 
     access_config {
