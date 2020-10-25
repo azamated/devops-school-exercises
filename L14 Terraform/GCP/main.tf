@@ -92,7 +92,7 @@ resource "google_compute_instance" "vm_instance2" {
     on_failure = continue
   }
 
-   provisioner "local-exec" {
+  provisioner "local-exec" {
     command = "cd /tmp && wget https://storage.googleapis.com/aamirakulov/java-webapp-prod.war && sudo cp java-webapp-prod.war /usr/local/tomcat/webapps/"
     on_failure = continue
   }
