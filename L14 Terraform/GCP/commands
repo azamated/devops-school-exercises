@@ -5,3 +5,7 @@
  pip install google-auth
  apt-get install google-cloud-sdk
  gcloud auth application-default login
+
+Useful commands:
+ gcloud compute instances list
+ gcloud compute ssh
