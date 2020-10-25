@@ -93,9 +93,10 @@ resource "google_compute_firewall" "default" {
 #################
 # Declaring instance-2
 resource "google_compute_instance" "vm_instance2" {
+  depends_on = [google_compute_instance.vm_instance2]
   name         = "ubuntu-production"
   machine_type = "e2-micro"
-  depends_on = [google_compute_instance.vm_instance2]
+
 
   boot_disk {
     initialize_params {
