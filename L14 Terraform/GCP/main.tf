@@ -40,7 +40,7 @@ resource "google_compute_instance" "vm_instance2" {
 
 resource "google_compute_firewall" "default" {
   name    = "instance-firewall"
-  network = google_compute_network.default.name
+  network = "default"
 
   allow {
     protocol = "icmp"
