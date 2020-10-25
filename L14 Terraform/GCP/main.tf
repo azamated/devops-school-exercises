@@ -20,7 +20,7 @@ resource "google_compute_instance" "vm_instance1" {
     # A default network is created for all GCP projects
     network = "default"
 
-    access_config {
+  access_config {
       // Ephemeral IP
     }
   }
