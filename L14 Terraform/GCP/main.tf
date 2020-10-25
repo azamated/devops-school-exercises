@@ -57,11 +57,38 @@ resource "google_compute_firewall" "default" {
 
 #Copy war artifact to Google Storage bucket
 resource "google_storage_bucket_object" "war-file" {
-  name   = "java-webapp-prod"
+  name   = "java-webapp-prod.war"
   source = "/tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war"
   bucket = "aamirakulov"
 }
 
+#################
+# Production node
+#################
+resource "google_compute_instance" "vm_instance2" {
+  name         = "ubuntu-production"
+  machine_type = "e2-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-1804-bionic-v20201014"
+    }
+  }
+
+  network_interface {
+    # A default network is created for all GCP projects
+    network = "default"
+
+    access_config {
+  // Ephemeral IP
+    }
+  }
+
+  provisioner "local-exec" {
+    command = "apt-get update && apt-get install -y docker.io && apt-get install -y git && apt-get install -y default-jdk && apt-get install -y tomcat8"
+  }
+
+}
 
 
 
