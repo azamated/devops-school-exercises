@@ -57,7 +57,6 @@ resource "google_compute_instance" "vm_instance1" {
       "mvn package -f /tmp/boxfuse-sample-java-war-hello",
       "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       "gsutil cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war gs://aamirakulov/",
-      #"docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello",
       "echo Instance-1 has been successfully deployed!"
     ]
   }
@@ -86,6 +85,14 @@ resource "google_compute_firewall" "default" {
   }
 
 }
+
+resource "google_project" "project" {
+  name            = "Wild Workouts"
+  project_id      = var.project
+  billing_account = data.google_billing_account.account.id
+}
+
+
 
 #################
 # Production node
@@ -138,8 +145,8 @@ resource "google_compute_instance" "vm_instance2" {
       "apt-get install -y tomcat8",
       "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       "gsutil cp gs://aamirakulov/hello-1.0.war /var/lib/tomcat8/webapps/",
-      #"cd /tmp && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war && cp hello-1.0.war /var/lib/tomcat8/webapps/",
-      "echo Instance-2 has been successfully deployed!"
+      "echo Instance-2 has been successfully deployed!",
+      "sleep 5m"
     ]
   }
     connection {
