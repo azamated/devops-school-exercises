@@ -5,8 +5,8 @@ provider "google" {
 }
 
 # Builder node
-resource "google_compute_instance" "vm_instance3" {
-  name         = "ubuntu-builder33"
+resource "google_compute_instance" "vm_instance" {
+  name         = "ubuntu-builder"
   machine_type = "e2-micro"
 
 
@@ -26,28 +26,14 @@ resource "google_compute_instance" "vm_instance3" {
   }
 
   provisioner "remote-exec" {
-    command = "sudo apt-get update && sudo apt-get install -y docker.io maven default-jdk google-cloud-sdk"
-
+    inline = [
+      "sudo apt-get update && sudo apt-get install -y docker.io maven default-jdk google-cloud-sd",
+      "cd /tmp",
+      "sudo git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git",
+      "sudo mvn package -f /tmp/boxfuse-sample-java-war-hello",
+      "sudo gsutil cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war gs://aamirakulov/"
+    ]
   }
-
-  provisioner "remote-exec" {
-    command = "cd /tmp"
-  }
-
-  provisioner "remote-exec" {
-    command = "sudo git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
-  }
-
-  provisioner "remote-exec" {
-    command = "sudo mvn package -f /tmp/boxfuse-sample-java-war-hello"
-
-  }
-
-  provisioner "remote-exec" {
-    command = "sudo gsutil cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war gs://aamirakulov/"
-
-  }
-
 
   }
 
