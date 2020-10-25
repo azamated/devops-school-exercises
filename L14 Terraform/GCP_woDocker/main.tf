@@ -136,7 +136,7 @@ resource "google_compute_instance" "vm_instance2" {
       "apt-get update && apt-get install -y docker.io",
       "apt-get install -y default-jdk",
       "apt-get install -y tomcat8",
-      "sleep 5m",
+      "sleep 200",
       "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       "gsutil cp gs://aamirakulov/hello-1.0.war /var/lib/tomcat8/webapps/",
       "echo Instance-2 has been successfully deployed!"
