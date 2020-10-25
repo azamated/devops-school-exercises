@@ -25,25 +25,25 @@ resource "google_compute_instance" "vm_instance3" {
     }
   }
 
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "sudo apt-get update && sudo apt-get install -y docker.io maven default-jdk google-cloud-sdk"
 
   }
 
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "cd /tmp"
   }
 
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "sudo git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
   }
 
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "sudo mvn package -f /tmp/boxfuse-sample-java-war-hello"
 
   }
 
-  provisioner "local-exec" {
+  provisioner "remote-exec" {
     command = "sudo gsutil cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war gs://aamirakulov/"
 
   }
