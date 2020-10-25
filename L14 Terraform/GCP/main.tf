@@ -31,12 +31,12 @@ resource "google_compute_instance" "vm_instance1" {
   }
 
   provisioner "local-exec" {
-    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git && sudo mvn package -f /tmp/boxfuse-sample-java-war-hello"
+    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
 
   }
 
-  provisioner "local-exec" {
-    command = "sudo docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
+    provisioner "local-exec" {
+    command = "sudo mvn package -f /tmp/boxfuse-sample-java-war-hello"
 
   }
 
@@ -89,7 +89,7 @@ resource "google_compute_instance" "vm_instance2" {
   }
 
   provisioner "local-exec" {
-    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y git && sudo apt-get install -y default-jdk && sudo apt-get install -y tomcat8"
+    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y git && sudo apt-get install -y default-jdk && sudo apt-get install -y tomcat"
 
   }
 
