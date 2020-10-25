@@ -50,8 +50,8 @@ resource "google_compute_instance" "vm_instance1" {
   provisioner "remote-exec" {
     inline = [
       "apt-get update && apt-get install -y docker.io",
-      "apt-get install -y maven",
-      "apt-get install -y google-cloud-sdk",
+      "apt-get install -y default-jdk maven",
+      "apt-get install -y python google-cloud-sdk",
       "cd /tmp",
       "git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git",
       "mvn package -f /tmp/boxfuse-sample-java-war-hello",
@@ -85,6 +85,15 @@ resource "google_compute_firewall" "default" {
     ports    = ["80", "8080", "22"]
   }
 
+}
+
+# NUll resource for delay 30 secs
+resource "null_resource" "previous" {}
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [null_resource.previous]
+
+  create_duration = "30s"
 }
 
 #################
