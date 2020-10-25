@@ -87,17 +87,6 @@ resource "google_compute_firewall" "default" {
 
 }
 
-# NUll resource for delay 30 secs
-resource "null_resource" "previous" {}
-
-resource "time_sleep" "wait_30_seconds" {
-  depends_on = [null_resource.previous]
-
-  create_duration = "30s"
-}
-resource "null_resource" "next" {
-  depends_on = [time_sleep.wait_30_seconds]
-}
 
 #################
 # Production node
@@ -106,6 +95,7 @@ resource "null_resource" "next" {
 resource "google_compute_instance" "vm_instance2" {
   name         = "ubuntu-production"
   machine_type = "e2-micro"
+  depends_on = [google_compute_instance.vm_instance2]
 
   boot_disk {
     initialize_params {
