@@ -6,7 +6,7 @@ provider "google" {
 
 # Builder node
 resource "google_compute_instance" "vm_instance1" {
-  name         = "ubuntu-builder3"
+  name         = "ubuntu-builder4"
   machine_type = "e2-micro"
 
 
@@ -26,7 +26,7 @@ resource "google_compute_instance" "vm_instance1" {
   }
 
   provisioner "local-exec" {
-    command = "sudo apt-get update && sudo apt-get install -y docker.io maven default-jdk gsutil"
+    command = "sudo apt-get update && sudo apt-get install -y docker.io maven default-jdk google-cloud-sdk"
 
   }
 
