@@ -24,15 +24,15 @@ resource "google_compute_instance" "vm_instance1" {
       // Ephemeral IP
     }
   }
-  provisioner "install packages" {
+  provisioner "local-exec" {
     command = "apt-get update; apt-get install -y docker.io && apt-get install -y maven && apt-get install -y git"
   }
 
-  provisioner "build javac" {
+  provisioner "local-exec" {
     command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git; mvn package -f /tmp/boxfuse-sample-java-war-hello"
   }
 
-  provisioner "build docker image" {
+  provisioner "local-exec" {
     command = "docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
   }
 
@@ -58,7 +58,7 @@ resource "google_compute_instance" "vm_instance2" {
     }
   }
 
-  provisioner "install packages" {
+  provisioner "local-exec" {
     command = "apt-get update; apt-get install -y docker.io && apt-get install -y git"
   }
 
