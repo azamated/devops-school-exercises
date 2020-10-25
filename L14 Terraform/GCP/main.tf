@@ -25,17 +25,17 @@ resource "google_compute_instance" "vm_instance1" {
     }
   }
   provisioner "local-exec" {
-    command = "apt-get update && apt-get install -y docker.io && apt-get install -y maven && apt-get install -y git"
+    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y maven && sudo apt-get install -y git"
     on_failure = continue
   }
 
   provisioner "local-exec" {
-    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git && mvn package -f /tmp/boxfuse-sample-java-war-hello"
+    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git && sudo mvn package -f /tmp/boxfuse-sample-java-war-hello"
     on_failure = continue
   }
 
   provisioner "local-exec" {
-    command = "docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
+    command = "sudo docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
     on_failure = continue
   }
 
@@ -88,12 +88,12 @@ resource "google_compute_instance" "vm_instance2" {
   }
 
   provisioner "local-exec" {
-    command = "apt-get update && apt-get install -y docker.io && apt-get install -y git && apt-get install -y default-jdk && apt-get install -y tomcat8"
+    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y git && sudo apt-get install -y default-jdk && sudo apt-get install -y tomcat8"
     on_failure = continue
   }
 
    provisioner "local-exec" {
-    command = "cd /tmp && wget https://storage.googleapis.com/aamirakulov/java-webapp-prod.war && cp ava-webapp-prod.war /usr/local/tomcat/webapps/"
+    command = "cd /tmp && wget https://storage.googleapis.com/aamirakulov/java-webapp-prod.war && sudo cp java-webapp-prod.war /usr/local/tomcat/webapps/"
     on_failure = continue
   }
 
