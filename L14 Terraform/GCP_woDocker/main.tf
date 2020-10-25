@@ -33,14 +33,16 @@ resource "google_compute_instance" "vm_instance1" {
   provisioner "file" {
     source = "credentials.json"
     destination = "tmp/credentials.json"
+
+    connection {
+      type = "ssh"
+      user = "root"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      agent = "false"
+  }
   }
 
-  connection {
-    type = "ssh"
-    user = "root"
-    private_key = "${file("~/.ssh/id_rsa")}"
-    agent = "false"
-  }
+
 
   provisioner "remote-exec" {
     inline = [
@@ -53,7 +55,12 @@ resource "google_compute_instance" "vm_instance1" {
       "docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
     ]
   }
-
+    connection {
+      type = "ssh"
+      user = "root"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      agent = "false"
+  }
     }
 
 #################
@@ -82,16 +89,18 @@ resource "google_compute_instance" "vm_instance2" {
     ssh-keys = "root:${file("~/.ssh/id_rsa.pub")}"
   }
 
-  connection {
-    type = "ssh"
-    user = "root"
-    private_key = "${file("~/.ssh/id_rsa")}"
-    agent = "false"
-  }
+
 
   provisioner "file" {
     source = "credentials.json"
     destination = "tmp/credentials.json"
+
+    connection {
+      type = "ssh"
+      user = "root"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      agent = "false"
+  }
   }
 
   provisioner "remote-exec" {
@@ -101,7 +110,12 @@ resource "google_compute_instance" "vm_instance2" {
       "cd /tmp && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war && sudo cp java-webapp-prod.war /var/lib/tomcat8/webapps/"
     ]
   }
-
+    connection {
+      type = "ssh"
+      user = "root"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      agent = "false"
+  }
 }
 
 ################
