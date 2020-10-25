@@ -87,13 +87,6 @@ resource "google_compute_firewall" "default" {
 
 }
 
-
-resource "time_sleep" "wait_30_seconds" {
-  depends_on = [google_compute_instance.vm_instance1]
-
-  create_duration = "30s"
-}
-
 #################
 # Production node
 #################
