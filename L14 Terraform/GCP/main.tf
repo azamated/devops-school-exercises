@@ -57,7 +57,7 @@ resource "google_compute_firewall" "default" {
 
 #Copy war artifact to Google Storage bucket
 resource "google_storage_bucket_object" "war-file" {
-  name   = "hello-1.0.war"
+  name   = "java-webapp-prod"
   source = "/tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war"
   bucket = "aamirakulov"
 }
