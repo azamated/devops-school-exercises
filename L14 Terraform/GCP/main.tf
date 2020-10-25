@@ -5,7 +5,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "ubuntu_builder"
+  name         = "ubuntu-builder"
   machine_type = "e2-micro"
 
   boot_disk {
