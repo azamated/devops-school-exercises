@@ -17,11 +17,13 @@ resource "google_compute_instance" "vm_instance1" {
   network_interface {
     # A default network is created for all GCP projects
     network = "default"
-  }
 
-  access_config {
+    access_config {
   // Ephemeral IP
     }
+  }
+
+
 
   metadata_startup_script = "apt-get update; apt-get install -y docker.io && apt-get install -y maven && apt-get install -y git; cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git && mvn package -f mvn package -f /tmp/boxfuse-sample-java-war-hello; docker build -f /tmp/boxfuse-sample-java-war-hell/Dockerfile -t boxfusewebapp /tmp/box; docker tag boxfusewebapp 013898691880.dkr.ecr.us-east-2.amazonaws.com/boxfusewebapp:latest"
 
@@ -41,11 +43,11 @@ resource "google_compute_instance" "vm_instance2" {
   network_interface {
     # A default network is created for all GCP projects
     network = "default"
-  }
 
-  access_config {
+    access_config {
   // Ephemeral IP
     }
+  }
 
   metadata_startup_script = "apt-get update; apt-get install -y docker.io"
 
