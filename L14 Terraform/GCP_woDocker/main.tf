@@ -86,14 +86,6 @@ resource "google_compute_firewall" "default" {
 
 }
 
-resource "google_project" "project" {
-  name            = "Wild Workouts"
-  project_id      = var.project
-  billing_account = data.google_billing_account.account.id
-}
-
-
-
 #################
 # Production node
 #################
