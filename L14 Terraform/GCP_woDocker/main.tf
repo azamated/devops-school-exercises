@@ -1,3 +1,5 @@
+
+#Declaring GCP provider
 provider "google" {
   credentials = "${file("credentials.json")}"
   project = "tough-history-289605"
@@ -5,7 +7,7 @@ provider "google" {
   zone    = "us-central1-a"
 }
 
-# Builder node
+# Declaring instance-1
 resource "google_compute_instance" "vm_instance1" {
   name         = "ubuntu-builder"
   machine_type = "e2-micro"
@@ -18,7 +20,7 @@ resource "google_compute_instance" "vm_instance1" {
   }
 
   network_interface {
-    # A default network is created for all GCP_woDocker projects
+    # Default network
     network = "default"
 
   access_config {
@@ -26,10 +28,12 @@ resource "google_compute_instance" "vm_instance1" {
     }
   }
 
+  #Copy public key
   metadata = {
     ssh-keys = "root:${file("~/.ssh/id_rsa.pub")}"
   }
 
+  #Copy GCP auth token
   provisioner "file" {
     source = "credentials.json"
     destination = "/tmp/credentials.json"
@@ -42,9 +46,12 @@ resource "google_compute_instance" "vm_instance1" {
   }
   }
 
+  #Remote command execution over ssh
   provisioner "remote-exec" {
     inline = [
-      "apt-get update && sudo apt-get install -y docker.io maven google-cloud-sdk",
+      "apt-get update && apt-get install -y docker.io,
+      "apt-get install -y maven",
+      "apt-get install -y google-cloud-sdk",
       "cd /tmp",
       "git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git",
       "mvn package -f /tmp/boxfuse-sample-java-war-hello",
@@ -83,6 +90,7 @@ resource "google_compute_firewall" "default" {
 #################
 # Production node
 #################
+# Declaring instance-2
 resource "google_compute_instance" "vm_instance2" {
   name         = "ubuntu-production"
   machine_type = "e2-micro"
@@ -94,7 +102,7 @@ resource "google_compute_instance" "vm_instance2" {
   }
 
   network_interface {
-    # A default network is created for all GCP_woDocker projects
+    #default network
     network = "default"
 
   access_config {
@@ -102,12 +110,12 @@ resource "google_compute_instance" "vm_instance2" {
     }
   }
 
+  #Copy public key
   metadata = {
     ssh-keys = "root:${file("~/.ssh/id_rsa.pub")}"
   }
 
-
-
+  #Copy GCP auth token
   provisioner "file" {
     source = "credentials.json"
     destination = "/tmp/credentials.json"
@@ -120,9 +128,12 @@ resource "google_compute_instance" "vm_instance2" {
   }
   }
 
+  #Remote command execution over ssh
   provisioner "remote-exec" {
     inline = [
-      "apt-get update && apt-get install -y docker.io default-jdk tomcat8",
+      "apt-get update && apt-get install -y docker.io",
+      "apt-get install -y default-jdk",
+      "apt-get install -y tomcat8",
       "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       "gsutil cp gs://aamirakulov/hello-1.0.war /var/lib/tomcat8/webapps/",
       #"cd /tmp && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war && cp hello-1.0.war /var/lib/tomcat8/webapps/",
