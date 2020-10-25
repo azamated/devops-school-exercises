@@ -27,6 +27,7 @@ resource "google_compute_instance" "vm_instance1" {
 
   provisioner "local-exec" {
     command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y maven && sudo apt-get install -y git"
+    on_failure = continue
   }
 
   provisioner "local-exec" {
