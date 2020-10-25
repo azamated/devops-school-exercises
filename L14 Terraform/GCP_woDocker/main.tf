@@ -42,8 +42,6 @@ resource "google_compute_instance" "vm_instance1" {
   }
   }
 
-
-
   provisioner "remote-exec" {
     inline = [
       "apt-get update && sudo apt-get install -y docker.io maven google-cloud-sdk",
@@ -52,7 +50,8 @@ resource "google_compute_instance" "vm_instance1" {
       "mvn package -f /tmp/boxfuse-sample-java-war-hello",
       "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
       "gsutil cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war gs://aamirakulov/",
-      "docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello"
+      #"docker build -f /tmp/boxfuse-sample-java-war-hello/Dockerfile -t boxfusewebapp /tmp/boxfuse-sample-java-war-hello",
+      "echo Instance-1 has been successfully deployed!"
     ]
   }
     connection {
@@ -123,9 +122,11 @@ resource "google_compute_instance" "vm_instance2" {
 
   provisioner "remote-exec" {
     inline = [
-      "apt-get update && apt-get install -y docker.io  default-jdk tomcat8",
+      "apt-get update && apt-get install -y docker.io default-jdk tomcat8",
       "gcloud auth activate-service-account --key-file=/tmp/credentials.json",
-      "cd /tmp && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war && cp hello-1.0.war /var/lib/tomcat8/webapps/"
+      "gsutil cp gs://aamirakulov/hello-1.0.war /var/lib/tomcat8/webapps/",
+      #"cd /tmp && wget https://storage.googleapis.com/aamirakulov/hello-1.0.war && cp hello-1.0.war /var/lib/tomcat8/webapps/",
+      "echo Instance-2 has been successfully deployed!"
     ]
   }
     connection {
