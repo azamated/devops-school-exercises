@@ -4,7 +4,7 @@ provider "google" {
   zone    = "us-central1-a"
 }
 
-resource "google_compute_instance" "vm_instance" {
+resource "google_compute_instance" "vm_instance1" {
   name         = "ubuntu-builder"
   machine_type = "e2-micro"
 
@@ -26,7 +26,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 }
 
-resource "google_compute_instance" "vm_instance" {
+resource "google_compute_instance" "vm_instance2" {
   name         = "ubuntu-production"
   machine_type = "e2-micro"
 
