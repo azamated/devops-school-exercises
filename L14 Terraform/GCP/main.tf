@@ -5,8 +5,8 @@ provider "google" {
 }
 
 # Builder node
-resource "google_compute_instance" "vm_instance1" {
-  name         = "ubuntu-builder4"
+resource "google_compute_instance" "vm_instance3" {
+  name         = "ubuntu-builder33"
   machine_type = "e2-micro"
 
 
@@ -31,7 +31,7 @@ resource "google_compute_instance" "vm_instance1" {
   }
 
   provisioner "local-exec" {
-    command = "cd /tmp && git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
+    command = "cd /tmp && sudo git clone https://github.com/azamated/boxfuse-sample-java-war-hello.git"
 
   }
 
