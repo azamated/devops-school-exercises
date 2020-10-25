@@ -49,7 +49,7 @@ resource "google_compute_instance" "vm_instance1" {
   #Remote command execution over ssh
   provisioner "remote-exec" {
     inline = [
-      "apt-get update && apt-get install -y docker.io,
+      "apt-get update && apt-get install -y docker.io",
       "apt-get install -y maven",
       "apt-get install -y google-cloud-sdk",
       "cd /tmp",
