@@ -14,7 +14,7 @@ resource "google_compute_instance" "vm_instance1" {
     }
   }
 
-   allow {
+  allow {
     protocol = "all"
   }
 
@@ -36,7 +36,7 @@ resource "google_compute_instance" "vm_instance2" {
     }
   }
 
-   allow {
+  allow {
     protocol = "all"
   }
 
