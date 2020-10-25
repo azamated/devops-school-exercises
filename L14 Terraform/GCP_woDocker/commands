@@ -6,6 +6,11 @@
  apt-get install google-cloud-sdk
  gcloud auth application-default login
 
+#generate a key pair
+ ssh-keygen
+
+New repository created in Google Cloud Storage with read/write permission to all
+
 Useful commands:
  gcloud compute instances list
  gcloud compute ssh
