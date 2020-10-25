@@ -32,6 +32,16 @@ resource "google_storage_bucket_object" "war-file" {
   bucket = "aamirakulov"
 }
 
+resource "google_storage_bucket_access_control" "public_rule" {
+  bucket = "aamirakulov"
+  role   = "READER"
+  entity = "allUsers"
+}
+
+resource "google_storage_bucket" "bucket" {
+  name = "static-content-bucket"
+}
+
 resource "google_compute_instance" "vm_instance2" {
   name         = "ubuntu-production"
   machine_type = "e2-micro"
