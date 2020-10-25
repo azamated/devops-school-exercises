@@ -6,7 +6,7 @@ provider "google" {
 
 # Builder node
 resource "google_compute_instance" "vm_instance1" {
-  name         = "ubuntu-builder1"
+  name         = "ubuntu-builder2"
   machine_type = "e2-micro"
 
 
@@ -26,7 +26,7 @@ resource "google_compute_instance" "vm_instance1" {
   }
 
   provisioner "local-exec" {
-    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y maven && sudo apt-get install -y git"
+    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y maven && sudo apt-get install -y default-jdk && sudo apt-get install -y git"
 
   }
 
@@ -70,7 +70,7 @@ resource "google_storage_bucket_object" "war-file" {
 # Production node
 #################
 resource "google_compute_instance" "vm_instance2" {
-  name         = "ubuntu-production1"
+  name         = "ubuntu-production2"
   machine_type = "e2-micro"
 
   boot_disk {
@@ -89,7 +89,7 @@ resource "google_compute_instance" "vm_instance2" {
   }
 
   provisioner "local-exec" {
-    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y git && sudo apt-get install -y default-jdk && sudo apt-get install -y tomcat"
+    command = "sudo apt-get update && sudo apt-get install -y docker.io && sudo apt-get install -y git && sudo apt-get install -y default-jdk && sudo apt-get install -y tomcat8"
 
   }
 
