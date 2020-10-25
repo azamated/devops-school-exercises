@@ -14,15 +14,9 @@ resource "google_compute_instance" "vm_instance1" {
     }
   }
 
-  allow {
-    protocol = "all"
-  }
-
   network_interface {
     # A default network is created for all GCP projects
     network = "default"
-    access_config {
-    }
   }
 }
 
@@ -36,14 +30,29 @@ resource "google_compute_instance" "vm_instance2" {
     }
   }
 
-  allow {
-    protocol = "all"
-  }
 
   network_interface {
     # A default network is created for all GCP projects
     network = "default"
-    access_config {
-    }
+
   }
+}
+
+resource "google_compute_firewall" "default" {
+  name    = "instance-firewall"
+  network = google_compute_network.default.name
+
+  allow {
+    protocol = "icmp"
+  }
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080", "22"]
+  }
+
+}
+
+resource "google_compute_network" "default" {
+  name = "instance-network"
 }
