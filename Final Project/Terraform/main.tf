@@ -26,7 +26,7 @@ resource "aws_instance" "builder" {
   instance_type = "t2.micro"
   monitoring = true
   key_name = "aws_id_rsa_pub"
-  vpc_security_group_ids = aws_security_group.build_allow_ssh.id
+  vpc_security_group_ids = [aws_security_group.build_allow_ssh.id]
   user_data = <<EOF
 #!/bin/bash
 sudo mkdir ~/.aws
@@ -41,7 +41,7 @@ EOF
       type = "ssh"
       user = "ubuntu"
       private_key = file("~/.ssh/id_rsa")
-      host = aws_instance.builder.public_ip
+      host = [aws_instance.builder.public_ip]
       agent = false
       timeout = "2m"
     }
@@ -53,7 +53,7 @@ resource "aws_instance" "production" {
   instance_type = "t2.micro"
   monitoring = true
   key_name = "aws_id_rsa_pub"
-  vpc_security_group_ids = aws_security_group.prod_allow_ssh_web.id
+  vpc_security_group_ids = [aws_security_group.prod_allow_ssh_web.id]
   user_data = <<EOF
 #!/bin/bash
 sudo mkdir ~/.aws
@@ -68,7 +68,7 @@ EOF
       type = "ssh"
       user = "ubuntu"
       private_key = file("~/.ssh/id_rsa")
-      host = aws_instance.production.public_ip
+      host = [aws_instance.production.public_ip]
       agent = false
       timeout = "2m"
     }
