@@ -20,6 +20,7 @@ resource "aws_key_pair" "id_rsa" {
 
 provider "aws" {
   region = "us-east-2"
+  shared_credentials_file = "~/.aws/credentials"
 }
 
 resource "aws_instance" "builder" {
