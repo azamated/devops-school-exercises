@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_instance" "builder1" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
-  security_groups_ids = ["aws_security_group_build"]
+  security_groups = ["aws_security_group_build"]
 
 }
 
