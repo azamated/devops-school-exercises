@@ -20,12 +20,13 @@ provider "aws" {
   region = "us-east-2"
 }
 
-resource "aws_instance" "builder3" {
+resource "aws_instance" "builder" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
   monitoring = true
   key_name = "aws_id_rsa_pub"
   vpc_security_group_ids = [aws_security_group.build_allow_ssh.id]
+  wait_for_fulfillment = true
 
   #Copies aws cred file to the instance
   provisioner "file" {
@@ -34,19 +35,21 @@ resource "aws_instance" "builder3" {
 
     connection {
       type = "ssh"
-      user = "root"
+      user = "ubuntu"
       private_key = "${file("~/.ssh/id_rsa")}"
-      agent = "false"
+      host = ["${aws_instance.builder.public_ip}"]
     }
   }
 }
 
-resource "aws_instance" "production3" {
+resource "aws_instance" "production" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
   monitoring = true
   key_name = "aws_id_rsa_pub"
   vpc_security_group_ids = [aws_security_group.prod_allow_ssh_web.id]
+  wait_for_fulfillment = true
+
   #Copies aws cred file to the instance
   provisioner "file" {
     source      = "~/.aws/credentials"
@@ -54,9 +57,9 @@ resource "aws_instance" "production3" {
 
     connection {
       type = "ssh"
-      user = "root"
+      user = "ubuntu"
       private_key = "${file("~/.ssh/id_rsa")}"
-      agent = "false"
+      host = ["${aws_instance.production.public_ip}"]
     }
   }
 }
@@ -115,4 +118,27 @@ resource "aws_security_group" "prod_allow_ssh_web" {
 ##############
 #Provisioners#
 ##############
+resource "aws_spot_instance_request" "app-ec2" {
+    ami = "ami-1c999999"
+    spot_price    = "0.008"
+    instance_type = "t2.small"
+    tags {
+        Name = "${var.app_name}"
+    }
+    key_name = "mykeypair"
+    associate_public_ip_address = true
+    vpc_security_group_ids = ["sg-99999999"]
+    subnet_id = "subnet-99999999"
+    iam_instance_profile = "myInstanceRole"
+    user_data = <<-EOF
+#!/bin/bash
+echo ECS_CLUSTER=APP-STAGING >> /etc/ecs/ecs.config
+    EOF
+}
 
+resource "aws_route53_record" "staging" {
+   zone_id = "XXXXXXXX"
+   name = "staging.myapp.com"
+   type = "A"
+   ttl = "300"
+   records = ["${aws_spot_instance_request.app-ec2.public_ip}"]
