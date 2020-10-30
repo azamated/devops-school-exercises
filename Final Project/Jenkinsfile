@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     tools {
         terraform 'TF'
     }
@@ -14,7 +15,7 @@ pipeline {
 
         stage ('Terraform init and Apply') {
             steps {
-                sh  '''cd /home/azamat/FinalProject && terraform init && terraform plan && terraform apply -input=false -auto-approve '''
+                sh  '''cd /home/azamat/FinalProject && terraform plan && terraform apply -input=false -auto-approve '''
             }
 
         }
