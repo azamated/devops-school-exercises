@@ -3,7 +3,7 @@ pipeline {
     tools {
         terraform 'TF'
     }
-String credentialsId = 'awsCredentials'
+//String credentialsId = 'awsCredentials'
 
     stages {
         stage ('get TF file') {
@@ -15,7 +15,7 @@ String credentialsId = 'awsCredentials'
 
         stage ('Terraform init and Apply') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: credentialsId, ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']]) {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: env.AWS_CREDENTIAL_ID, ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']]) {
                 sh  '''cd /home/azamat/FinalProject && terraform init \
                 terraform plan && terraform apply -input=false -auto-approve '''
                 }
