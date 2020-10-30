@@ -16,6 +16,7 @@ pipeline {
         stage ('Terraform init and Apply') {
             steps {
                 sh 'cd /home/azamat/FinalProject && terraform init'
+                sh 'terraform plan'
             }
 
         }
