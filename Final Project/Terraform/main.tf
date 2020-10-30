@@ -20,6 +20,7 @@ resource "aws_key_pair" "id_rsa" {
 
 provider "aws" {
   region = "us-east-2"
+  profile = "default"
 }
 
 resource "aws_instance" "builder" {
