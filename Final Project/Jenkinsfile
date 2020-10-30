@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    tools {
+        terraform 'TF'
+    }
+    stages {
+            stage ('get TF file') {
+                steps   {
+                    sh 'cd /tmp && wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/Final%20Project/Jenkinsfile'
+                }
+            }
+
+    }
+
+}
+
+
+
