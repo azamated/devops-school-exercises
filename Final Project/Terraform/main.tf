@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_instance" "builder1" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
-  security_groups = ["aws_security_group_build"]
+  security_groups = ["prod_allow_ssh_web"]
 
 }
 
@@ -29,7 +29,7 @@ resource "aws_instance" "production2" {
 ##############################################
 #Create security groups with FW ports allowed#
 ##############################################
-resource "aws_security_group_build" "allow_ssh" {
+resource "aws_security_group" "build_allow_ssh" {
   name = "allow_ssh"
   description = "Allow SSH inbound traffic"
   ingress {
@@ -42,7 +42,7 @@ resource "aws_security_group_build" "allow_ssh" {
   }
 }
 
-resource "aws_security_group_prod" "allow_ssh_web" {
+resource "aws_security_group" "prod_allow_ssh_web" {
   name = "allow_ssh"
   description = "Allow SSH and Web inbound traffic"
   ingress {
