@@ -26,7 +26,6 @@ resource "aws_instance" "builder" {
   monitoring = true
   key_name = "aws_id_rsa_pub"
   vpc_security_group_ids = [aws_security_group.build_allow_ssh.id]
-  wait_for_fulfillment = true
 
   #Copies aws cred file to the instance
   provisioner "file" {
@@ -48,7 +47,6 @@ resource "aws_instance" "production" {
   monitoring = true
   key_name = "aws_id_rsa_pub"
   vpc_security_group_ids = [aws_security_group.prod_allow_ssh_web.id]
-  wait_for_fulfillment = true
 
   #Copies aws cred file to the instance
   provisioner "file" {
