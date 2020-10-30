@@ -29,7 +29,7 @@ resource "aws_instance" "production2" {
 ##############################################
 #Create security groups with FW ports allowed#
 ##############################################
-resource "aws_security_group_build" "allow ssh" {
+resource "aws_security_group_build" "allow_ssh" {
   name = "allow_ssh"
   description = "Allow SSH inbound traffic"
   ingress {
@@ -42,7 +42,7 @@ resource "aws_security_group_build" "allow ssh" {
   }
 }
 
-resource "aws_security_group_prod" "allow ssh and web" {
+resource "aws_security_group_prod" "allow_ssh_web" {
   name = "allow_ssh"
   description = "Allow SSH and Web inbound traffic"
   ingress {
