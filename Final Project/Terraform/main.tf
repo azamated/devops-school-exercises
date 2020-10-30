@@ -42,9 +42,9 @@ resource "aws_security_group_build" "allow ssh" {
   }
 }
 
-resource "aws_security_group_prod" "allow ssh&web" {
+resource "aws_security_group_prod" "allow ssh and web" {
   name = "allow_ssh"
-  description = "Allow SSH inbound traffic"
+  description = "Allow SSH and Web inbound traffic"
   ingress {
     description = "SSH"
     from_port = 22
