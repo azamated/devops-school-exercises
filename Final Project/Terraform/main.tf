@@ -33,8 +33,8 @@ resource "aws_instance" "builder" {
 sudo mkdir ~/.aws
 EOF
 
-  #Copies aws cred file to the instance
-  provisioner "file" {
+ // #Copies aws cred file to the instance
+  /*provisioner "file" {
     source      = "~/.aws/credentials"
     destination = "~/.aws/credentials"
 
@@ -46,7 +46,7 @@ EOF
       agent = false
       timeout = "2m"
     }
-  }
+  }*/
 }
 
 resource "aws_instance" "production" {
@@ -60,7 +60,7 @@ resource "aws_instance" "production" {
 sudo mkdir ~/.aws
 EOF
 
-  #Copies aws cred file to the instance
+  /*#Copies aws cred file to the instance
   provisioner "file" {
     source      = "~/.aws/credentials"
     destination = "~/.aws/credentials"
@@ -73,7 +73,7 @@ EOF
       agent = false
       timeout = "2m"
     }
-  }
+  }*/
 }
 
 
