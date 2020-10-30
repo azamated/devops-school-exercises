@@ -9,14 +9,13 @@ pipeline {
     stages {
         stage ('get TF file') {
             steps {
-                sh  '''wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/Final%20Project/Terraform/main.tf '''
+                sh  '''cd /home/azamat/FinalProject && wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/Final%20Project/Terraform/main.tf '''
             }
         }
 
         stage ('Terraform init and Apply') {
             steps {
-                sh 'terraform init'
-                sh 'terraform plan && terraform apply -input=false -auto-approve'
+                sh 'cd /home/azamat/FinalProject && terraform init && terraform plan && terraform apply -input=false -auto-approve'
             }
 
         }
