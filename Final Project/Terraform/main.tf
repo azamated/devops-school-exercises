@@ -33,22 +33,6 @@ resource "aws_instance" "builder" {
 sudo mkdir ~/.aws
 EOF
 
- // #Copies aws cred file to the instance
-  /*provisioner "file" {
-    source      = "~/.aws/credentials"
-    destination = "~/.aws/credentials"
-
-    connection {
-      type = "ssh"
-      user = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
-      host = self.public_ip
-      agent = false
-      timeout = "2m"
-    }
-  }*/
-}
-
 resource "aws_instance" "production" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
@@ -60,20 +44,6 @@ resource "aws_instance" "production" {
 sudo mkdir ~/.aws
 EOF
 
-  /*#Copies aws cred file to the instance
-  provisioner "file" {
-    source      = "~/.aws/credentials"
-    destination = "~/.aws/credentials"
-
-    connection {
-      type = "ssh"
-      user = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
-      host = self.public_ip
-      agent = false
-      timeout = "2m"
-    }
-  }*/
 }
 
 
