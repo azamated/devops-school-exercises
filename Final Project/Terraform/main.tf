@@ -17,14 +17,14 @@ provider "aws" {
 resource "aws_instance" "builder1" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
-  security_groups = ["prod_allow_ssh_web"]
+  security_groups = ["build_allow_ssh"]
 
 }
 
 resource "aws_instance" "production2" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
-  security_groups = ["aws_security_group_prod"]
+  security_groups = ["prod_allow_ssh_web"]
 }
 ##############################################
 #Create security groups with FW ports allowed#
