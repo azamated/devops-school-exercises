@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+variable "ami_key_pair_name" {}
 ######################
 #Create aws instances#
 ######################
@@ -18,6 +19,7 @@ provider "aws" {
 resource "aws_instance" "builder3" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
+  monitoring = true
   vpc_security_group_ids = [aws_security_group.build_allow_ssh.id]
 
 }
@@ -25,6 +27,7 @@ resource "aws_instance" "builder3" {
 resource "aws_instance" "production3" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
+  monitoring = true
   vpc_security_group_ids = [aws_security_group.prod_allow_ssh_web.id]
 }
 
