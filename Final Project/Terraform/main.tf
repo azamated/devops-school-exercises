@@ -7,6 +7,7 @@ terraform {
   }
 }
 
+
 #Copy a public key to instances
 resource "aws_key_pair" "id_rsa" {
   key_name   = "aws_id_rsa_pub"
