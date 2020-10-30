@@ -1,19 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 3.0"
-    }
-  }
-}
-
-
-#Copy a public key to instances
-resource "aws_key_pair" "id_rsa" {
-  key_name   = "aws_id_rsa_pub"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8LHlRNOITkvCFipJu/GFBVICUEXEtZJBawqJyKk8frjIeSvdgpZSfOxdgRDHUQ8XWote6QxSXsp4f1JtBWJNAagKI0y14egh0mxAMtzcPkSrNR4IxjmMEFBS70tgLyg13V4FStK2rrcRPwpmttdD0/bys3FALk7yTIlGfqpEH4RN2qk+xkLR6HMwXPFEDtqt9KyIND84F8TjwxOZGahKlia5kS2W+9V3L6fn3KuSf36vIrLahvgQsYIQeBgaIKtlDlhqHUzOz/+Y1E22T08OuqswqwEQdvlfybchGc/68gYlkNib3BKGIAtbJY4h6ynPKdPcEK01AUHxj6fy6nynHABBrSJtlqcgbJfGaZxoRl0AwTWH3DuEHNgqFyDdr54eStHEfmatNdqf21VdqqegNQaw8AX0LUWCzp5sZ4NzuN25+RRoVjtFaZjWINoVimqWqRVntatW1LDNTnA05BRad1eAp37D9Js1yqT/8ilWmH/UO8EsujQvEagvspcevXI0= root@devops"
-}
-
 ######################
 #Create aws instances#
 ######################
@@ -21,6 +5,12 @@ resource "aws_key_pair" "id_rsa" {
 provider "aws" {
   region = "us-east-2"
   profile = "default"
+}
+
+#Copy a public key to instances
+resource "aws_key_pair" "id_rsa" {
+  key_name   = "aws_id_rsa_pub"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC8LHlRNOITkvCFipJu/GFBVICUEXEtZJBawqJyKk8frjIeSvdgpZSfOxdgRDHUQ8XWote6QxSXsp4f1JtBWJNAagKI0y14egh0mxAMtzcPkSrNR4IxjmMEFBS70tgLyg13V4FStK2rrcRPwpmttdD0/bys3FALk7yTIlGfqpEH4RN2qk+xkLR6HMwXPFEDtqt9KyIND84F8TjwxOZGahKlia5kS2W+9V3L6fn3KuSf36vIrLahvgQsYIQeBgaIKtlDlhqHUzOz/+Y1E22T08OuqswqwEQdvlfybchGc/68gYlkNib3BKGIAtbJY4h6ynPKdPcEK01AUHxj6fy6nynHABBrSJtlqcgbJfGaZxoRl0AwTWH3DuEHNgqFyDdr54eStHEfmatNdqf21VdqqegNQaw8AX0LUWCzp5sZ4NzuN25+RRoVjtFaZjWINoVimqWqRVntatW1LDNTnA05BRad1eAp37D9Js1yqT/8ilWmH/UO8EsujQvEagvspcevXI0= root@devops"
 }
 
 resource "aws_instance" "builder" {
