@@ -27,11 +27,15 @@ resource "aws_instance" "builder" {
   instance_type = "t2.micro"
   monitoring = true
   key_name = "aws_id_rsa_pub"
-  vpc_security_group_ids = [aws_security_group.build_allow_ssh.id]
+  vpc_security_group_ids = [
+    aws_security_group.build_allow_ssh.id]
   user_data = <<EOF
 #!/bin/bash
 sudo mkdir ~/.aws
 EOF
+
+}
+
 
 resource "aws_instance" "production" {
   ami = "ami-07efac79022b86107"
