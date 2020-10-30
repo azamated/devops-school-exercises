@@ -17,14 +17,14 @@ provider "aws" {
 resource "aws_instance" "builder1" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
-  vpc_security_group = "aws_security_group_build"
+  security_groups_ids = ["aws_security_group_build"]
 
 }
 
 resource "aws_instance" "production2" {
   ami = "ami-07efac79022b86107"
   instance_type = "t2.micro"
-  vpc_security_group = "aws_security_group_prod"
+  security_groups = ["aws_security_group_prod"]
 }
 ##############################################
 #Create security groups with FW ports allowed#
