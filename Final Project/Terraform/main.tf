@@ -37,7 +37,7 @@ resource "aws_instance" "builder" {
       type = "ssh"
       user = "ubuntu"
       private_key = "${file("~/.ssh/id_rsa")}"
-      host = ["${aws_instance.builder.public_ip}"]
+      host = [aws_instance.builder.public_ip]
     }
   }
 }
@@ -59,7 +59,7 @@ resource "aws_instance" "production" {
       type = "ssh"
       user = "ubuntu"
       private_key = "${file("~/.ssh/id_rsa")}"
-      host = ["${aws_instance.production.public_ip}"]
+      host = [aws_instance.production.public_ip]
     }
   }
 }
