@@ -12,5 +12,4 @@ less /var/lib/jenkins/secrets/initialAdminPassword
 Jenkins plugins:
 - Ansible
 - Terraform
-- AWS Secrets Manager Credentials Provider
 
