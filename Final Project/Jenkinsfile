@@ -15,7 +15,7 @@ pipeline {
 
         stage ('Terraform init and Apply') {
             steps {
-                sh 'echo azamat | sudo -S command'
+                sh 'echo azamat | sudo -i command'
                 sh 'cd /home/azamat/FinalProject && terraform init'
                 sh 'terraform plan && terraform apply -input=false -auto-approve'
             }
