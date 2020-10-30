@@ -118,27 +118,3 @@ resource "aws_security_group" "prod_allow_ssh_web" {
 ##############
 #Provisioners#
 ##############
-resource "aws_spot_instance_request" "app-ec2" {
-    ami = "ami-1c999999"
-    spot_price    = "0.008"
-    instance_type = "t2.small"
-    tags {
-        Name = "${var.app_name}"
-    }
-    key_name = "mykeypair"
-    associate_public_ip_address = true
-    vpc_security_group_ids = ["sg-99999999"]
-    subnet_id = "subnet-99999999"
-    iam_instance_profile = "myInstanceRole"
-    user_data = <<-EOF
-#!/bin/bash
-echo ECS_CLUSTER=APP-STAGING >> /etc/ecs/ecs.config
-    EOF
-}
-
-resource "aws_route53_record" "staging" {
-   zone_id = "XXXXXXXX"
-   name = "staging.myapp.com"
-   type = "A"
-   ttl = "300"
-   records = ["${aws_spot_instance_request.app-ec2.public_ip}"]
