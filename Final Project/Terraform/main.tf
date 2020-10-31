@@ -11,6 +11,8 @@ terraform {
 ######################
 provider "aws" {
   region = "us-east-2"
+  shared_credentials_file = "~/.aws/credentials"
+  profile                 = "default"
 }
 
 #Copy a public key to instances
@@ -37,7 +39,6 @@ resource "aws_instance" "production" {
 
 
 }
-
 
 ##############################################
 #Create security groups with FW ports allowed#
