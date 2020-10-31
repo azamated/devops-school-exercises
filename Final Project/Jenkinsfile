@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        tool name: 'TF', type: 'terraform'
+        tool name: 'org.jenkinsci.plugins.terraform.TerraformInstallation', type: 'terraform'
     }
 
    parameters {
