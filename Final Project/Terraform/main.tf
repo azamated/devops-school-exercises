@@ -11,8 +11,6 @@ terraform {
 ######################
 provider "aws" {
   region = "us-east-2"
-  ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
-  SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
 }
 
 #Copy a public key to instances
