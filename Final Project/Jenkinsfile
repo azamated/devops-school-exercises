@@ -20,13 +20,13 @@ pipeline {
     stages {
         stage ('get TF file') {
             steps {
-                sh  '''cd /home/azamat/FinalProject && wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/Final%20Project/Terraform/main.tf '''
+                sh  '''wget https://raw.githubusercontent.com/azamated/devops-school-exercises/master/Final%20Project/Terraform/main.tf '''
             }
         }
 
         stage ('Terraform init and Apply') {
             steps {
-                sh '''cd /home/azamat/FinalProject && terraform init \
+                sh '''terraform init \
                 && terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
                 && terraform apply -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -auto-approve '''
             }
