@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        tool 'TF'
+        terraform "TF"
     }
 
     environment {
@@ -20,9 +20,9 @@ pipeline {
 
         stage ('Terraform init and Apply') {
             steps {
-                sh '''terraform init \
-                && terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
-                && terraform apply -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -auto-approve '''
+                sh 'terraform init'
+                sh 'terraform plan -var "access_key=$ACCESS_KEY" -var "secret_key=$SECRET_KEY"'
+                sh 'terraform apply -var "access_key=$ACCESS_KEY" -var "secret_key=$SECRET_KEY" -auto-approve'
             }
 
         }
