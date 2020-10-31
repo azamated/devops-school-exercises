@@ -5,9 +5,8 @@ pipeline {
         tool name: 'terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'', type: 'terraform'
     }
 
-   //  parameters {
-    //    string(name: 'WORKSPACE', defaultValue: 'development', description:'setting up workspace for terraform')
-    //}
+        string(name: 'WORKSPACE', defaultValue: 'development', description:'setting up workspace for terraform')
+    }
     environment {
         TF_HOME = tool('TF')
         TF_IN_AUTOMATION = "true"
