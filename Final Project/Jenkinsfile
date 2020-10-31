@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        terraform 'TF'
+        tool name: 'TF', type: 'terraform'
     }
 
    parameters {
