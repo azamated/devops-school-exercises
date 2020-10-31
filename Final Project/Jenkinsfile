@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        tool name: 'TF', type: 'terraform'
+        tool name: 'terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'', type: 'terraform'
     }
 
    //  parameters {
