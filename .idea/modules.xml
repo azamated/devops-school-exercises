@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Jenkins-Terraform-Ansible/.idea/Jenkins-Terraform-Ansible.iml" filepath="$PROJECT_DIR$/../Jenkins-Terraform-Ansible/.idea/Jenkins-Terraform-Ansible.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/devops-school-exercises.iml" filepath="$PROJECT_DIR$/.idea/devops-school-exercises.iml" />
     </modules>
   </component>
