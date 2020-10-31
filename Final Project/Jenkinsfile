@@ -28,11 +28,11 @@ pipeline {
             steps {
                 sh '''cd /home/azamat/FinalProject && terraform init \
                 && terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
-                && terraform apply -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -auto-approve
-
+                && terraform apply -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -auto-approve '''
             }
 
         }
     }
 
 }
+
