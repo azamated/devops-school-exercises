@@ -4,7 +4,18 @@ pipeline {
     tools {
         terraform 'TF'
     }
-//String credentialsId = 'awsCredentials'
+
+     parameters {
+        string(name: 'WORKSPACE', defaultValue: 'development', description:'setting up workspace for terraform')
+    }
+    environment {
+        TF_HOME = tool('TF')
+        TF_IN_AUTOMATION = "true"
+       // PATH = "$TF_HOME:$PATH"
+        ACCESS_KEY = credentials('AWS_ACCESS_KEY_ID')
+        SECRET_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
 
     stages {
         stage ('get TF file') {
@@ -15,8 +26,10 @@ pipeline {
 
         stage ('Terraform init and Apply') {
             steps {
-                sh 'cd /home/azamat/FinalProject && terraform init'
-                sh 'cd /home/azamat/FinalProject && terraform plan'
+                sh '''cd /home/azamat/FinalProject && terraform init \
+                && terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' \
+                && terraform apply -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -auto-approve
+
             }
 
         }
