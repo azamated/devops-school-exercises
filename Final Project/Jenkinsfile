@@ -21,7 +21,7 @@ pipeline {
         stage ('Terraform init and Apply') {
             steps {
                 sh 'cd /home/azamat/finalProject && terraform init'
-                sh 'cd /home/azamat/finalProject && terraform plan -var "access_key=$ACCESS_KEY" -var "secret_key=$SECRET_KEY"'
+                sh "cd /home/azamat/finalProject && terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY'"
                 sh 'cd /home/azamat/finalProject && terraform apply -var "access_key=$ACCESS_KEY" -var "secret_key=$SECRET_KEY" -auto-approve'
             }
 
